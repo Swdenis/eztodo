@@ -4,12 +4,23 @@ import {NavLink} from 'react-router-dom'
 
 export default function NavBar() {
     return(
+    <Container>
     <Menu secondary>
-        <Container>
         <Menu.Item as={NavLink} to='/items' content="My to-do list"/>
         <Menu.Item as={NavLink} to='/about' content="About" />
         <Menu.Item as={NavLink} to='/add' content="Add item" position='right'/>
-        </Container>
     </Menu>
+    <Menu text>
+        <Menu.Item
+          name='Show today'
+        />
+        <Menu.Item
+          name='week'
+        />
+        <Menu.Item
+          name='month'
+        /> 
+      </Menu>
+    </Container>
     )
 }
