@@ -17,10 +17,10 @@ export default function App() {
         <Router history={history} >
         <Container>
         <Route path='/' exact component={Login}/>
-        <PrivateRoute path='/items' component={ItemsList}/>
         <PrivateRoute path='/' component={NavBar}/>
         <PrivateRoute path='/about' component={About}/>
         <PrivateRoute path='/add' component={AddItem}/>
+        <PrivateRoute path='/items' component={ItemsList}/>
         </Container>
         </Router>
         </>

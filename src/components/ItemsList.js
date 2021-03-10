@@ -9,10 +9,13 @@ export default function ItemsList() {
     const dispatch = useDispatch()
 
     const items = Object.values(useSelector(state => state.items))
+    const {loginData} = useSelector(state => state.auth)
+    
 
-    useEffect(()=>dispatch(getItems()),[dispatch])
-
-    console.log(items.map(item=> item.body))
+    useEffect(()=> {
+        if(loginData) 
+        {const {userId, access_token} = loginData
+        dispatch(getItems(userId,access_token))}},[dispatch,loginData,items])
 
     return(
         <List>

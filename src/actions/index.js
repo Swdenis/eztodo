@@ -14,11 +14,15 @@ export const signOut = () => {
 export const tryLogIn = (values) => async dispatch => {
     const response = await login.post('/login', values)
     dispatch({type: LOGIN, payload: response.data})
-    
 }
 
-export const getItems = () => async dispatch => {
-    const response = await items.get('/items')
+export const getItems = (userId, accessToken) => async dispatch => {
+    const response = await items.get('/items/userId',{
+        'headers': {
+          'Authorization': `Bearer ${accessToken}`,
+          'userId': userId
+        }
+      })
     dispatch({type: FETCH_ITEMS, payload: response.data})
 }
 
