@@ -1,4 +1,4 @@
-import { FETCH_ITEMS,ADD_ITEM,UPDATE_ITEM,DELETE_ITEM,FETCH_ITEM } from "../actions/types";
+import { FETCH_ITEMS,ADD_ITEM,UPDATE_ITEM,DELETE_ITEM,FETCH_ITEM, SIGN_OUT } from "../actions/types";
 import _ from 'lodash';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -14,6 +14,8 @@ export default (state={},action) => {
             return _.omit(state,[action.payload])
         case FETCH_ITEM:
             return {...state,[action.payload.userId]:action.payload}
+        case SIGN_OUT:
+            return({})
         default:
             return state
     }
