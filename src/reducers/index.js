@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
+import isSignedInReducer from './isSignedInReducer';
 import itemReducer from './itemReducer';
+import loginReducer from './loginReducer';
 
 export default combineReducers(
     {
         items: itemReducer,
-        auth: authReducer
+        auth: loginReducer,
+        isSignedIn: isSignedInReducer
     }
 )

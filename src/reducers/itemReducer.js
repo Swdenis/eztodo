@@ -5,15 +5,15 @@ import _ from 'lodash';
 export default (state={},action) => {
     switch(action.type) {
         case FETCH_ITEMS:
-            return {...state,..._.mapKeys(action.payload, 'id')}
+            return {...state,..._.mapKeys(action.payload.userId, 'id')}
         case ADD_ITEM:
-            return {...state,[action.payload]:action.payload}
+            return {...state,[action.payload.userId]:action.payload}
         case UPDATE_ITEM:
-            return {...state,[action.payload]:action.payload}
+            return {...state,[action.payload.userId]:action.payload}
         case DELETE_ITEM:
             return _.omit(state,[action.payload])
         case FETCH_ITEM:
-            return {...state,[action.payload]:action.payload}
+            return {...state,[action.payload.userId]:action.payload}
         default:
             return state
     }

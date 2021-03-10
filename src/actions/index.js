@@ -1,13 +1,20 @@
 import items from "../api/items"
-import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT } from "./types"
+import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT, LOGIN} from "./types"
 import history from "../history"
+import login from "../api/login"
 
-export const signIn = userId => {
+export const signIn = (userId) => {
     return {type:SIGN_IN, payload: userId}
 }
 
 export const signOut = () => {
     return {type:SIGN_OUT}
+}
+
+export const tryLogIn = (values) => async dispatch => {
+    const response = await login.post('/login', values)
+    dispatch({type: LOGIN, payload: response.data})
+    
 }
 
 export const getItems = () => async dispatch => {
