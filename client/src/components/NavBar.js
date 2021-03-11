@@ -16,7 +16,7 @@ export default function NavBar() {
     return(
     <Container>
     <Menu secondary>
-        <Menu.Item as={NavLink} to='/items' content="My to-do list"/>
+        <Menu.Item as={NavLink} to='/month' content="My to-do list"/>
         <Menu.Item as={NavLink} to='/about' content="About" />
         <Menu.Item as={NavLink} to='/add' content="Add item"/>
         <Menu.Item position="right">
@@ -24,15 +24,9 @@ export default function NavBar() {
         </Menu.Item>
     </Menu>
     <Menu text>
-        <Menu.Item
-          name='Show today'
-        />
-        <Menu.Item
-          name='week'
-        />
-        <Menu.Item
-          name='month'
-        /> 
+        <Menu.Item as={NavLink} to='/today' content="Today"/>
+        <Menu.Item as={NavLink} to='/week' content="This week"/>
+        <Menu.Item as={NavLink} to='/month' content="This month"/>
       </Menu>
     </Container>
     )

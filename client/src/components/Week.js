@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems } from "../actions";
+import dateFormat from "dateformat"
 
-export default function Calendar() {
+export default function Week() {
     const dispatch = useDispatch()
 
     const items = Object.values(useSelector(state => state.items))
     const {loginData} = useSelector(state => state.auth)
+    
     
     useEffect(()=> {
         if(loginData) 
@@ -15,38 +17,58 @@ export default function Calendar() {
         dispatch(getItems(userId,access_token))}},[dispatch,loginData])
 
 
-    const [currentMonth, setCurrentMonth] = useState(new Date())
+    const [currentWeek, setCurrentWeek] = useState(dateFns.startOfWeek(new Date()))
     const [selectedDate, setSelectedDate] = useState(new Date())
 
-    console.log(items)
+    // console.log(currentWeek)
+    // console.log(dateFns.lastDayOfWeek(currentWeek))
 
     const onDateClick = day => {
         setSelectedDate(day)
     }
 
-    const nextMonth = () => {
-        setCurrentMonth(dateFns.addMonths(currentMonth, 1))
+    const setNextWeek = () => {
+        setCurrentWeek(dateFns.addWeeks(currentWeek, 1))
     }
 
-    const prevMonth = () => {
-        setCurrentMonth(dateFns.subMonths(currentMonth, 1))
+    const setPrevWeek = () => {
+        setCurrentWeek(dateFns.subWeeks(currentWeek, 1))
     }
 
     const renderHeader = () => {
-        const dateFormat = "MMMM yyyy";
+        console.log(currentWeek)
+        const nextWeek = dateFns.addWeeks(currentWeek,1)
         return (
             <div className="header row flex-middle">
             <div className="col col-start">
-                <div className="icon" onClick={prevMonth}>
+                <div className="icon" onClick={setPrevWeek}>
                 chevron_left
                 </div>
             </div>
             <div className="col col-center">
+                {
+                !dateFns.isSameMonth(currentWeek,nextWeek) 
+                ?
+                <>
                 <span>
-                {dateFns.format(currentMonth, dateFormat)}
+                {dateFormat(currentWeek,  "dd mmm")}
                 </span>
+                <span>
+                {dateFormat(nextWeek, "-dd mmm")}
+                </span>
+                </>
+                :
+                <>
+                <span>
+                {dateFormat(currentWeek,  "dd")}
+                </span>
+                <span>
+                {dateFormat(nextWeek, "-dd mmm")}
+                </span>
+                </>
+                }
             </div>
-            <div className="col col-end" onClick={nextMonth}>
+            <div className="col col-end" onClick={setNextWeek}>
                 <div className="icon">chevron_right</div>
             </div>
             </div>)
@@ -55,7 +77,7 @@ export default function Calendar() {
     const renderDays = () => {
         const dateFormat = "iiii";
         const days = [];
-        let startDate = dateFns.startOfWeek(currentMonth);
+        let startDate = dateFns.startOfWeek(currentWeek);
         for (let i = 0; i < 7; i++) {
         days.push(
         <div className="col col-center" key={i}>
@@ -65,10 +87,8 @@ export default function Calendar() {
         return <div className="days row">{days}</div>}
 
     const renderCells = () => {
-        const monthStart = dateFns.startOfMonth(currentMonth);
-        const monthEnd = dateFns.endOfMonth(monthStart);
-        const startDate = dateFns.startOfWeek(monthStart);
-        const endDate = dateFns.endOfWeek(monthEnd);
+        const startDate = dateFns.startOfWeek(currentWeek);
+        const endDate = dateFns.endOfWeek(currentWeek);
 
         const dateFormat = "d";
         const rows = [];
@@ -84,7 +104,7 @@ export default function Calendar() {
             days.push(
             <div
                 className={`col cell ${
-                !dateFns.isSameMonth(day, monthStart)
+                !dateFns.isSameWeek(day, startDate)
                     ? "disabled"
                     : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                 }`}

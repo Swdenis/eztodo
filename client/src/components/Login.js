@@ -25,7 +25,7 @@ export default function Login() {
         if(loginData) {
             if(loginData.success === true) {
                 dispatch(signIn(loginData.userId))
-                history.push('/items')
+                history.push('/today')
             } else {toast.error(loginData.message)}
         }
         },[loginData,dispatch])
