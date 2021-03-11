@@ -6,7 +6,7 @@ const port = 3001
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
-const itemsdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
+let itemsdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
 const bodyParser = require('body-parser')
 
 
@@ -92,7 +92,7 @@ server.get('/items/userId', (req, res) => {
            res.status(status).json({status, message})
            return
          }
-        
+        itemsdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
         const userId = req.headers.userid
         const items = itemsdb.items.filter(item=> item.userId === userId)
         res.status(200).json(items)

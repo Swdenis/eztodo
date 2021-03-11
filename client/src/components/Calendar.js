@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 
 export default function Calendar({items}) {
 
     const [currentMonth, setCurrentMonth] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState(new Date())
+
+    console.log(items)
 
     const onDateClick = day => {
         setSelectedDate(day)
@@ -65,8 +67,8 @@ export default function Calendar({items}) {
         for (let i = 0; i < 7; i++) {
             formattedDate = dateFns.format(day, dateFormat);
             const cloneDay = day;
-            const thingsToDo = items.map(item => 
-                dateFns.isSameDay(new Date(item.date), cloneDay) ? item : null)
+            let thingsToDo = items.filter(item => 
+                dateFns.isSameDay(new Date(item.date), cloneDay))
             days.push(
             <div
                 className={`col cell ${
@@ -77,12 +79,7 @@ export default function Calendar({items}) {
                 key={day}
                 onClick={() => onDateClick(dateFns.toDate(cloneDay))}
             >
-                {dateFns.isSameDay(new Date(thingsToDo[0]?.date), dateFns.toDate(cloneDay))
-                    ?
-                <span className="countThingsToDo">
-                <span className="num">{thingsToDo.length}</span> things to do
-                </span> 
-                    : null}
+                {renderCountThingsToDo(thingsToDo,cloneDay)}
                 <span className="number">{formattedDate}</span>
                 <span className="bg">{formattedDate}</span>
             </div>
@@ -99,6 +96,24 @@ export default function Calendar({items}) {
         return <div className="body">{rows}</div>
     }
 
+    const renderCountThingsToDo = (thingsToDo,cloneDay) => {
+        return(
+        dateFns.isSameDay(new Date(thingsToDo[0]?.date), dateFns.toDate(cloneDay))
+            ?
+        <span className="countThingsToDo">
+        <span
+        style={
+            thingsToDo.length > 5 ?
+            {'color':'red'}
+            : thingsToDo.length > 2 ? {'color':'orange'}
+            : {'color':'green'}
+        }
+        >{thingsToDo.length}</span>
+        {thingsToDo.length > 1 ? " things to do" : " thing to do"}
+        </span> 
+            : null
+        )
+    }
     return (
       <div className='calendar'>
         {renderHeader()}

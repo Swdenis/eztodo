@@ -23,11 +23,3 @@ export default function ItemsList() {
         </>
         )
 }
-
-
-{/* <ul>
-                    {items.map(item => dateFns.isSameDay(new Date(item.date),cloneDay) ?
-                    <span>{item.body}</span> 
-                    : null
-                )}
-                </ul> */}

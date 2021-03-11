@@ -26,8 +26,11 @@ export const getItems = (userId, accessToken) => async dispatch => {
     dispatch({type: FETCH_ITEMS, payload: response.data})
 }
 
-export const addItem = formValues => async dispatch => {
-    const response = await items.post('/items',formValues)
+export const addItem = (formValues,accessToken) => async dispatch => {
+    const response = await items.post('/items',formValues,{
+        'headers': {
+          'Authorization': `Bearer ${accessToken}`}
+      })
     console.log(response)
     dispatch({type: ADD_ITEM, payload: response.data})
     history.push('/items')

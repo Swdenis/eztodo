@@ -176,10 +176,6 @@ main {
   font-weight: 700;
 }
 
-.calendar .body .cell .countThingsToDo .num {
-    color: red;  
-}
-
 .calendar .body .cell:hover {
   background: var(--bg-color);
   transition: 0.5s ease-out;

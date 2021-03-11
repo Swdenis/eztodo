@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik,Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../actions';
 import * as Yup from 'yup' 
 import { Header } from 'semantic-ui-react';
@@ -8,6 +8,7 @@ import history from '../history';
 
 export default function AddItem() {
 
+    const {loginData: {userId, access_token}} = useSelector(state => state.auth)
 
     const validationSchema = Yup.object(
     {
@@ -19,9 +20,9 @@ export default function AddItem() {
     return(
         <Formik
             validationSchema={validationSchema}
-            initialValues={{ body: '', date: '' }}
+            initialValues={{ body: '', date: '', userId: userId }}
             onSubmit={(values, { setSubmitting }) => {
-                dispatch(addItem(values))
+                dispatch(addItem(values,access_token))
                 setSubmitting(false)
                 console.log(values)
                 history.push('/items')
