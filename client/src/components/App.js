@@ -9,6 +9,7 @@ import AddItem from '../modals/AddItem'
 import PrivateRoute from './PrivateRoute'
 import Login from './Login'
 import { ToastContainer } from 'react-toastify'
+import '../App.css' 
 
 export default function App() {
     return(

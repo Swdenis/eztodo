@@ -3,6 +3,7 @@ import {getItems} from '../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import Item from './Item'
 import { List } from 'semantic-ui-react'
+import Calendar from './Calendar'
 
 export default function ItemsList() {
 
@@ -17,11 +18,14 @@ export default function ItemsList() {
         dispatch(getItems(userId,access_token))}},[dispatch,loginData])
 
     return(
+        <>
         <List>
         {items.map(item=>{
             return <Item key={item.id} body={item.body} />
         })}
         </List>
+        <Calendar />
+        </>
         )
 }
 
