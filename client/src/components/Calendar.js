@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as dateFns from "date-fns";
 
-export default function Calendar() {
+export default function Calendar({items}) {
 
     const [currentMonth, setCurrentMonth] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState(new Date())
@@ -65,6 +65,8 @@ export default function Calendar() {
         for (let i = 0; i < 7; i++) {
             formattedDate = dateFns.format(day, dateFormat);
             const cloneDay = day;
+            const thingsToDo = items.map(item => 
+                dateFns.isSameDay(new Date(item.date), cloneDay) ? item : null)
             days.push(
             <div
                 className={`col cell ${
@@ -73,12 +75,19 @@ export default function Calendar() {
                     : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                 }`}
                 key={day}
-                onClick={() => onDateClick(dateFns.parse(cloneDay))}>
+                onClick={() => onDateClick(dateFns.toDate(cloneDay))}
+            >
+                {dateFns.isSameDay(new Date(thingsToDo[0]?.date), dateFns.toDate(cloneDay))
+                    ?
+                <span className="countThingsToDo">
+                <span className="num">{thingsToDo.length}</span> things to do
+                </span> 
+                    : null}
                 <span className="number">{formattedDate}</span>
                 <span className="bg">{formattedDate}</span>
             </div>
             );
-            day = dateFns.addDays(day, 1);
+            day = dateFns.addDays(day, 1)
         }
         rows.push(
             <div className="row" key={day}>

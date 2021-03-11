@@ -19,13 +19,15 @@ export default function ItemsList() {
 
     return(
         <>
-        <List>
-        {items.map(item=>{
-            return <Item key={item.id} body={item.body} />
-        })}
-        </List>
-        <Calendar />
+        <Calendar items={items}/>
         </>
         )
 }
 
+
+{/* <ul>
+                    {items.map(item => dateFns.isSameDay(new Date(item.date),cloneDay) ?
+                    <span>{item.body}</span> 
+                    : null
+                )}
+                </ul> */}

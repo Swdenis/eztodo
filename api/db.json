@@ -2,13 +2,13 @@
   "items": [
     {
       "id": "1",
-      "date": "01.02.2021",
+      "date": "2021-03-06",
       "body": "write an essay",
       "userId": "1"
     },
     {
       "id": "2",
-      "date": "01.02.2022",
+      "date": "2021-03-06",
       "body": "go to doctor",
       "userId": "1"
     },
