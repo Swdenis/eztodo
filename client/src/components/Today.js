@@ -70,7 +70,7 @@ export default function Today() {
         <Container
         position="center"
         text
-        style={{"font-size": "140%"}}
+        style={{"fontSize": "140%"}}
         content="You don't have any tasks for today!"/>)
     }
 

@@ -3,9 +3,9 @@ import { Formik,Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn, tryLogIn } from '../actions';
 import * as Yup from 'yup' 
-import { Button, Header } from 'semantic-ui-react';
+import { Button, Container, Header } from 'semantic-ui-react';
 import history from '../history';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Login() {
 
@@ -20,13 +20,11 @@ export default function Login() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        
-        if(loginData) {
+          if(loginData) {
             if(loginData.success === true) {
                 dispatch(signIn(loginData.userId))
                 history.push('/today')
-            } else {toast.error(loginData.message)}
-        }
+        }}
         },[loginData,dispatch])
    
         return(

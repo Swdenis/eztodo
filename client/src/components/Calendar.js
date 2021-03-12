@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems } from "../actions";
+import DayCard from "./DayCard";
+import { Popup } from "semantic-ui-react";
 
 export default function Calendar() {
     const dispatch = useDispatch()
@@ -64,7 +66,7 @@ export default function Calendar() {
         )}
         return <div className="days row">{days}</div>}
 
-    const renderCells = () => {
+        const renderCells = () => {
         const monthStart = dateFns.startOfMonth(currentMonth);
         const monthEnd = dateFns.endOfMonth(monthStart);
         const startDate = dateFns.startOfWeek(monthStart);
@@ -82,7 +84,9 @@ export default function Calendar() {
             let thingsToDo = items.filter(item => 
                 dateFns.isSameDay(new Date(item.date), cloneDay))
             days.push(
-            <div
+            <Popup
+            trigger={
+                <div
                 className={`col cell ${
                 !dateFns.isSameMonth(day, monthStart)
                     ? "disabled"
@@ -95,6 +99,11 @@ export default function Calendar() {
                 <span className="number">{formattedDate}</span>
                 <span className="bg">{formattedDate}</span>
             </div>
+            }>
+                <Popup.Content>
+                    <DayCard day={cloneDay} items = {thingsToDo} />
+                    </Popup.Content>
+            </Popup>  
             );
             day = dateFns.addDays(day, 1)
         }

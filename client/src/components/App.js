@@ -16,8 +16,8 @@ import Today from './Today'
 export default function App() {
     return(
         <>
-        <ToastContainer position='bottom-right' hideProgressBar />
         <Router history={history} >
+        <ToastContainer position='bottom-right' hideProgressBar />
         <Container>
         <Route path='/' exact component={Login}/>
         <PrivateRoute path='/' component={NavBar}/>
