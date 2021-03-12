@@ -25,7 +25,7 @@ export default function AddItem() {
                 dispatch(addItem(values,access_token))
                 setSubmitting(false)
                 console.log(values)
-                history.push('/items')
+                history.push('/today')
             }
         }
         >

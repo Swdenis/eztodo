@@ -236,3 +236,8 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
+
+#itemsRow {
+  font-size: 14px; 
+  margin-top: 15px;
+}

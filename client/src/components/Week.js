@@ -3,13 +3,13 @@ import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems } from "../actions";
 import dateFormat from "dateformat"
+import { Grid, List } from "semantic-ui-react";
 
 export default function Week() {
     const dispatch = useDispatch()
 
     const items = Object.values(useSelector(state => state.items))
     const {loginData} = useSelector(state => state.auth)
-    
     
     useEffect(()=> {
         if(loginData) 
@@ -19,9 +19,7 @@ export default function Week() {
 
     const [currentWeek, setCurrentWeek] = useState(dateFns.startOfWeek(new Date()))
     const [selectedDate, setSelectedDate] = useState(new Date())
-
-    // console.log(currentWeek)
-    // console.log(dateFns.lastDayOfWeek(currentWeek))
+    const itemsToDo = []
 
     const onDateClick = day => {
         setSelectedDate(day)
@@ -36,7 +34,6 @@ export default function Week() {
     }
 
     const renderHeader = () => {
-        console.log(currentWeek)
         const nextWeek = dateFns.addWeeks(currentWeek,1)
         return (
             <div className="header row flex-middle">
@@ -101,6 +98,7 @@ export default function Week() {
             const cloneDay = day;
             let thingsToDo = items.filter(item => 
                 dateFns.isSameDay(new Date(item.date), cloneDay))
+            itemsToDo.push(thingsToDo)
             days.push(
             <div
                 className={`col cell ${
@@ -146,11 +144,35 @@ export default function Week() {
             : null
         )
     }
+    const renderItemsToDo = () => {
+        return(
+            <div className="row" id="itemsRow">
+            {itemsToDo.map(itemArray => 
+                <div className='col' key={itemsToDo.indexOf(itemArray)}>
+                        <List verticalAlign='middle'>
+                            {itemArray.map(item =>
+                                        <List.Item key={item.id} style={{"padding-top":"10px"}}>
+                                            <List.Icon centered size='small' name='check' style={{
+                                                "color": "#1a8fff","padding-top":"3px","margin-right":"3px"}}/>
+                                            {item.body}
+                                        </List.Item>)
+                            }
+                        </List>
+                </div>
+            )}
+            </div>   
+    )}
+
+    console.log(itemsToDo)
     return (
-      <div className='calendar'>
-        {renderHeader()}
-        {renderDays()}
-        {renderCells()}
-      </div>
+        <>
+        <div className='calendar'>
+            {renderHeader()}
+            {renderDays()}
+            {renderCells()}
+            
+        </div>
+            {renderItemsToDo()}
+        </>
     )
 }

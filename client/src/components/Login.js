@@ -10,7 +10,6 @@ import { toast } from 'react-toastify';
 export default function Login() {
 
     const {loginData} = useSelector(state => state.auth)
-    console.log(loginData)
     
     const validationSchema = Yup.object(
     {

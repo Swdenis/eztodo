@@ -33,26 +33,26 @@ export const addItem = (formValues,accessToken) => async dispatch => {
       })
     console.log(response)
     dispatch({type: ADD_ITEM, payload: response.data})
-    history.push('/items')
+    history.push('/today')
 } 
 
 export const updateItem = id => async dispatch => {
     const response = await items.patch(`/items/${id}`)
     console.log(response)
     dispatch({type: UPDATE_ITEM, payload: response.data})
-    history.push('/items')
+    history.push('/today')
 }
 
 export const deleteItem = id => async dispatch => {
     const response = await items.delete(`/items'/${id}`)
     console.log(response)
     dispatch({type: DELETE_ITEM, payload: id})
-    history.push('/items')
+    history.push('/today')
 } 
 
 export const getItem = id => async dispatch => {
     const response = await items.get(`/items'/${id}`)
     console.log(response)
     dispatch({type: FETCH_ITEM, payload: response.data})
-    history.push('/items')
+    history.push('/today')
 } 

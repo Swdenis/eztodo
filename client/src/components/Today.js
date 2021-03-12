@@ -54,7 +54,6 @@ export default function Today() {
     const renderItems = (items) => {
         const todayItems = items.filter(item => 
             dateFns.isSameDay(new Date(item.date),currentDay))
-        console.log(todayItems)
         if(todayItems.length > 0)
         {
         return(
@@ -62,7 +61,7 @@ export default function Today() {
         {
         todayItems.map(item => 
             <List.Item key={item.id}>
-                <List.Icon name='marker' />
+                <List.Icon name='check' />
                 {item.body}
             </List.Item>)
         }
