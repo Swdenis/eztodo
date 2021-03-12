@@ -141,7 +141,7 @@ export default function Week() {
         >{thingsToDo.length}</span>
         {thingsToDo.length > 1 ? " things to do" : " thing to do"}
         </span> 
-            : null
+            : ''
         )
     }
     const renderItemsToDo = () => {
