@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { Formik,Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn, tryLogIn } from '../actions';
 import * as Yup from 'yup' 
-import { Button, Container, Header } from 'semantic-ui-react';
-import history from '../history';
-import { toast, ToastContainer } from 'react-toastify';
+import { Button, Container, Header, Segment } from 'semantic-ui-react';
+import history from '../history'
+import MyTextInput from './MyTextInput';
 
 export default function Login() {
 
@@ -28,6 +28,7 @@ export default function Login() {
         },[loginData,dispatch])
    
         return(
+        <Container textAlign='center' text className='masthead'>
         <Formik
             validationSchema={validationSchema}
             initialValues={{ email: 'test@test.com', password: 'test123' }}
@@ -44,23 +45,10 @@ export default function Login() {
          isSubmitting,
          isValid
        }) => (
-         <Form className='ui form error' onSubmit={handleSubmit}>
+         <Form className='ui form' onSubmit={handleSubmit}>
             <Header as='h2' textAlign='center' content='Login to app' />
-            <Field
-             name="email"
-             placeholder="email"
-           />
-           <Field 
-             name="password"
-             placeholder="password"
-             onKeyPress={e=>{
-                if (e.key === 'Enter' && e.shiftKey) {
-                    return
-                } else if(e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault()
-                    isValid && handleSubmit()
-                }}}
-           />
+            <MyTextInput name='email' placeholder='Email' />
+            <MyTextInput name= 'password' placeholder='Password' type='password' />
            {errors.email && touched.email && errors.email}
            {errors.password && touched.password && errors.password}
            <Button positive type="submit" disabled={isSubmitting}>
@@ -69,6 +57,7 @@ export default function Login() {
          </Form>
        )}
         </Formik>
+      </Container>
     )
 }
     
