@@ -6,6 +6,7 @@ import reduxThunk from 'redux-thunk';
 import App from './components/App'
 import reducers from './reducers'
 import 'semantic-ui-css/semantic.min.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers,
