@@ -1,5 +1,5 @@
 import items from "../api/items"
-import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT, LOGIN,SET_SELECTED_DATE,DISCARD_SELECTED_DATE} from "./types"
+import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT, LOGIN,SET_SELECTED_DATE} from "./types"
 import history from "../history"
 import login from "../api/login"
 import { toast } from "react-toastify"
@@ -53,6 +53,7 @@ export const deleteItem = (itemId, accessToken)=> async (dispatch,getState) => {
           'Authorization': `Bearer ${accessToken}`}
     })
     dispatch({type: DELETE_ITEM, payload: itemId})
+
 } 
 
 export const getItem = id => async dispatch => {

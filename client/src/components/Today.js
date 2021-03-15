@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems, setSelectedDate, deleteItem } from "../actions";
-import { Button, Container, Grid, Icon, List } from "semantic-ui-react";
+import { Container, Grid, Icon, List } from "semantic-ui-react";
 import { useParams } from "react-router";
 
 export default function Today() {
@@ -10,6 +10,7 @@ export default function Today() {
     const { date } = useParams()
 
     const items = Object.values(useSelector(state => state.items))
+
     const {loginData} = useSelector(state => state.auth)
     
     useEffect(()=> {
@@ -17,7 +18,8 @@ export default function Today() {
         dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
-        dispatch(getItems(userId,access_token))}},[dispatch, loginData, date])
+        dispatch(getItems(userId, access_token)
+        )}},[dispatch, loginData, date])
 
 
     const [currentDay, setCurrentDay] = useState(new Date())
@@ -86,15 +88,16 @@ export default function Today() {
                     >
                         <List.Content 
                         style={{display:"inline"}}>
-                       {item.body}
+                        {item.body}
                         </List.Content>
                         {showEditItems && activeItemId === item.id ?
                             <List.Content
-                            style={{display:"inline", position:"absolute", left:"200px"}}>
+                            style={{display:"inline",position: "absolute", left:"200px"}}>
                                     <Icon color="green" name='check' />
                                     <Icon color="red" onClick={handleDelete} name='delete'/>
                             </List.Content> 
                         : null}
+                 
                     </List.Item>
                     )
                 }
