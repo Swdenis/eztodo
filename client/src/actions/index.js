@@ -1,5 +1,5 @@
 import items from "../api/items"
-import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT, LOGIN,SET_SELECTED_DATE} from "./types"
+import { GET_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, GET_ITEM,SIGN_IN,SIGN_OUT, LOGIN,SET_SELECTED_DATE} from "./types"
 import history from "../history"
 import login from "../api/login"
 import { toast } from "react-toastify"
@@ -28,7 +28,7 @@ export const getItems = (userId, accessToken) => async dispatch => {
           'userId': userId
         }
       })
-    dispatch({type: FETCH_ITEMS, payload: response.data})
+    dispatch({type: GET_ITEMS, payload: response.data})
 }
 
 export const addItem = (formValues,accessToken) => async dispatch => {
@@ -59,6 +59,6 @@ export const deleteItem = (itemId, accessToken)=> async (dispatch,getState) => {
 export const getItem = id => async dispatch => {
     const response = await items.get(`/items'/${id}`)
     console.log(response)
-    dispatch({type: FETCH_ITEM, payload: response.data})
+    dispatch({type: GET_ITEM, payload: response.data})
     history.push('/today')
 } 
