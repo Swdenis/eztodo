@@ -1,12 +1,16 @@
 import React from 'react'
 import {Button, Container, Menu} from 'semantic-ui-react'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useLocation} from 'react-router-dom'
 import { signOut } from '../actions'
 import history from '../history'
 import { useDispatch } from 'react-redux'
 
 export default function NavBar() {
     const dispatch = useDispatch()
+
+    const location = useLocation()
+
+    console.log(location.pathname)
 
     const handleSingOut = () => {
       dispatch(signOut())
@@ -17,8 +21,9 @@ export default function NavBar() {
     <Container>
     <Menu secondary>
         <Menu.Item as={NavLink} to='/today' content="My to-do list"/>
-        <Menu.Item as={NavLink} to='/about' content="About" />
-        <Menu.Item as={NavLink} to='/add' content="Add item"/>
+        <Menu.Item>
+            <Button positive disabled={location.pathname === "/add"} as={NavLink} to='/add' content="Add item"/>
+        </Menu.Item>
         <Menu.Item position="right">
             <Button onClick={handleSingOut} content="Log out" negative/>
         </Menu.Item>

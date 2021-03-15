@@ -2,7 +2,6 @@ import React from 'react'
 import {Router, Route} from 'react-router'
 import { Container } from 'semantic-ui-react'
 import NavBar from './NavBar'
-import About from './About'
 import history from '../history'
 import AddItem from '../modals/AddItem'
 import PrivateRoute from './PrivateRoute'
@@ -22,7 +21,6 @@ export default function App() {
         <Container>
         <Route path='/' exact component={Login}/>
         <PrivateRoute path='/' component={NavBar}/>
-        <PrivateRoute path='/about' component={About}/>
         <PrivateRoute path='/add' component={AddItem}/>
         <PrivateRoute path='/month' component={Month}/>
         <PrivateRoute path='/week' component={Week}/>
