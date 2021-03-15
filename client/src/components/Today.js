@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, setSelectedDate } from "../actions";
-import { Container, Grid, List } from "semantic-ui-react";
+import { getItems, setSelectedDate, deleteItem } from "../actions";
+import { Button, Container, Grid, Icon, List } from "semantic-ui-react";
 import { useParams } from "react-router";
 
 export default function Today() {
@@ -17,7 +17,7 @@ export default function Today() {
         dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
-        dispatch(getItems(userId,access_token))}},[dispatch,loginData, date])
+        dispatch(getItems(userId,access_token))}},[dispatch, loginData, date])
 
 
     const [currentDay, setCurrentDay] = useState(new Date())
@@ -54,28 +54,63 @@ export default function Today() {
             </div>)
     }
 
-    const renderItems = (items) => {
+    const handelShowEditItems = (e) => {
+        setActiveItemId(e.target.id)
+        setShowEditItems(true)
+    }
+
+    const [showEditItems, setShowEditItems] = useState(false)
+
+    const [activeItemId, setActiveItemId] = useState(null)
+
+    const handleDelete= () => {
+        dispatch(deleteItem(activeItemId,loginData.access_token))
+        alert("You deleted the to-do item")
+    }
+
+    const handleMouseLeave =() => {
+        setShowEditItems(false)
+        setActiveItemId(null)
+    }
+
+    const renderListOfItems = (todayItems) => {
+        return(
+            <List bulleted verticalAlign='middle' style={{fontSize:"20px"}}>
+                {
+                todayItems.map(item => 
+                    <List.Item 
+                    key={item.id}
+                    id={item.id} 
+                    onMouseEnter={e => handelShowEditItems(e)}
+                    onMouseLeave={handleMouseLeave}
+                    >
+                        <List.Content 
+                        style={{display:"inline"}}>
+                       {item.body}
+                        </List.Content>
+                        {showEditItems && activeItemId === item.id ?
+                            <List.Content
+                            style={{display:"inline", position:"absolute", left:"200px"}}>
+                                    <Icon color="green" name='check' />
+                                    <Icon color="red" onClick={handleDelete} name='delete'/>
+                            </List.Content> 
+                        : null}
+                    </List.Item>
+                    )
+                }
+        </List>)}
+
+    const renderDay = (items) => {
         const todayItems = items.filter(item => 
             dateFns.isSameDay(new Date(item.date),currentDay))
-        if(todayItems.length > 0)
-        {
-        return(
-        <List verticalAlign='middle' style={{fontSize:"20px"}}>
-        {
-        todayItems.map(item => 
-            <List.Item key={item.id}>
-                <List.Icon name='check' />
-                {item.body}
-            </List.Item>)
-        }
-        </List>)}
+        if(todayItems.length > 0) return(renderListOfItems(todayItems))
         return(
         <Container
         position="center"
         text
         style={{"fontSize": "140%"}}
         content="You don't have any tasks for today!"/>)
-    }
+        }
 
     return (
 
@@ -89,11 +124,11 @@ export default function Today() {
         </Grid.Row>
         <Grid.Row>
                 <Grid.Column>
-                {renderItems(items)}
+                {renderDay(items)}
                 </Grid.Column>
                 <Grid.Column/>
                 <Grid.Column/>
         </Grid.Row>
     </Grid>
     )
-}   
+} 

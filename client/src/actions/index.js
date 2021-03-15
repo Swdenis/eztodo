@@ -47,11 +47,12 @@ export const updateItem = id => async dispatch => {
     history.push('/today')
 }
 
-export const deleteItem = id => async dispatch => {
-    const response = await items.delete(`/items'/${id}`)
-    console.log(response)
-    dispatch({type: DELETE_ITEM, payload: id})
-    history.push('/today')
+export const deleteItem = (itemId, accessToken)=> async (dispatch,getState) => {
+    const response = await items.delete(`/items/${itemId}`,{
+        'headers': {
+          'Authorization': `Bearer ${accessToken}`}
+    })
+    dispatch({type: DELETE_ITEM, payload: itemId})
 } 
 
 export const getItem = id => async dispatch => {

@@ -46,7 +46,7 @@ export default function Login() {
          isValid
        }) => (
          <Form className='ui form' onSubmit={handleSubmit}>
-            <Header as='h2' textAlign='center' content='Login to app' />
+            <Header as='h2' textAlign='center' content='Welcome to EzToDo!' />
             <Container style={{  display: "flex", justifyContent: "center", alignItems: "center", 
             alignContent: "center", height: "100%", position: "relative", flexWrap: "wrap", flexDirection:"column"}}>
                 <MyTextInput name='email' placeholder='Email' />

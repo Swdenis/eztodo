@@ -7,13 +7,13 @@ export default (state={},action) => {
         case FETCH_ITEMS:
             return {...state,...action.payload}
         case ADD_ITEM:
-            return {...state,[action.payload.userId]:action.payload}
+            return {...state,[action.payload.id]:action.payload}
         case UPDATE_ITEM:
-            return {...state,[action.payload.userId]:action.payload}
+            return {...state,[action.payload.id]:action.payload}
         case DELETE_ITEM:
             return _.omit(state,[action.payload])
         case FETCH_ITEM:
-            return {...state,[action.payload.userId]:action.payload}
+            return {...state,[action.payload.id]:action.payload}
         case SIGN_OUT:
             return({})
         default:
