@@ -16,7 +16,7 @@ export default function NavBar() {
     return(
     <Container>
     <Menu secondary>
-        <Menu.Item as={NavLink} to='/month' content="My to-do list"/>
+        <Menu.Item as={NavLink} to='/today' content="My to-do list"/>
         <Menu.Item as={NavLink} to='/about' content="About" />
         <Menu.Item as={NavLink} to='/add' content="Add item"/>
         <Menu.Item position="right">

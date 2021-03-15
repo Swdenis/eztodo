@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems } from "../actions";
+import { getItems, setSelectedDate } from "../actions";
 import dateFormat from "dateformat"
-import { Grid, List } from "semantic-ui-react";
+import { List } from "semantic-ui-react";
 
 export default function Week() {
     const dispatch = useDispatch()
@@ -12,17 +12,19 @@ export default function Week() {
     const {loginData} = useSelector(state => state.auth)
     
     useEffect(()=> {
+        dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
         dispatch(getItems(userId,access_token))}},[dispatch,loginData])
 
 
     const [currentWeek, setCurrentWeek] = useState(dateFns.startOfWeek(new Date()))
-    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [selectedWeekday, setSelectedWeekday] = useState(new Date())
     const itemsToDo = []
 
     const onDateClick = day => {
-        setSelectedDate(day)
+        setSelectedWeekday(day)
+        dispatch(setSelectedDate(day))
     }
 
     const setNextWeek = () => {
@@ -104,7 +106,7 @@ export default function Week() {
                 className={`col cell ${
                 !dateFns.isSameWeek(day, startDate)
                     ? "disabled"
-                    : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                    : dateFns.isSameDay(day, selectedWeekday) ? "selected" : ""
                 }`}
                 key={day}
                 onClick={() => onDateClick(dateFns.toDate(cloneDay))}
@@ -163,7 +165,6 @@ export default function Week() {
             </div>   
     )}
 
-    console.log(itemsToDo)
     return (
         <>
         <div className='calendar'>

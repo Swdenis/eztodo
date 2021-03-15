@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems } from "../actions";
-import { Container, Grid, GridColumn, List } from "semantic-ui-react";
+import { getItems, setSelectedDate } from "../actions";
+import { Container, Grid, List } from "semantic-ui-react";
 
 export default function Today() {
     const dispatch = useDispatch()
@@ -11,24 +11,24 @@ export default function Today() {
     const {loginData} = useSelector(state => state.auth)
     
     useEffect(()=> {
+        dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
         dispatch(getItems(userId,access_token))}},[dispatch,loginData])
 
 
     const [currentDay, setCurrentDay] = useState(new Date())
-    const [selectedDate, setSelectedDate] = useState(new Date())
-
-    const onDateClick = day => {
-        setSelectedDate(day)
-    }
 
     const setNextDay = () => {
-        setCurrentDay(dateFns.addDays(currentDay, 1))
+        let date = dateFns.addDays(currentDay, 1)
+        setCurrentDay(date)
+        dispatch(setSelectedDate(date))
     }
 
     const setPrevDay = () => {
-        setCurrentDay(dateFns.subDays(currentDay, 1))
+        let date = dateFns.subDays(currentDay, 1)
+        setCurrentDay(date)
+        dispatch(setSelectedDate(date))
     }
 
     const renderHeader = () => {

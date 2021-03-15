@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems } from "../actions";
+import { getItems, setSelectedDate } from "../actions";
 import DayCard from "./DayCard";
 import { Popup } from "semantic-ui-react";
 
-export default function Calendar() {
+export default function Month() {
     const dispatch = useDispatch()
 
     const items = Object.values(useSelector(state => state.items))
     const {loginData} = useSelector(state => state.auth)
     
     useEffect(()=> {
+        dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
         dispatch(getItems(userId,access_token))}},[dispatch,loginData])
 
 
     const [currentMonth, setCurrentMonth] = useState(new Date())
-    const [selectedDate, setSelectedDate] = useState(new Date())
-
-    console.log(items)
+    const [selectedMonthDate, setSelectedMonthDate] = useState(new Date())
 
     const onDateClick = day => {
-        setSelectedDate(day)
+        setSelectedMonthDate(day)
+        dispatch(setSelectedDate(day))
     }
 
     const nextMonth = () => {
@@ -90,7 +90,7 @@ export default function Calendar() {
                 className={`col cell ${
                 !dateFns.isSameMonth(day, monthStart)
                     ? "disabled"
-                    : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                    : dateFns.isSameDay(day, selectedMonthDate) ? "selected" : ""
                 }`}
                 key={day}
                 onClick={() => onDateClick(dateFns.toDate(cloneDay))}

@@ -1,5 +1,5 @@
 import items from "../api/items"
-import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT, LOGIN} from "./types"
+import { FETCH_ITEMS,ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, FETCH_ITEM,SIGN_IN,SIGN_OUT, LOGIN,SET_SELECTED_DATE,DISCARD_SELECTED_DATE} from "./types"
 import history from "../history"
 import login from "../api/login"
 import { toast } from "react-toastify"
@@ -10,6 +10,10 @@ export const signIn = (userId) => {
 
 export const signOut = () => {
     return {type:SIGN_OUT}
+}
+
+export const setSelectedDate = (date) => {
+    return {type: SET_SELECTED_DATE, payload: new Date(date)}
 }
 
 export const tryLogIn = (values) => async dispatch => {

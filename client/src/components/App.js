@@ -9,7 +9,7 @@ import PrivateRoute from './PrivateRoute'
 import Login from './Login'
 import { ToastContainer } from 'react-toastify'
 import '../App.css' 
-import Calendar from './Calendar'
+import Month from './Month'
 import Week from './Week'
 import Today from './Today'
 
@@ -24,7 +24,7 @@ export default function App() {
         <PrivateRoute path='/' component={NavBar}/>
         <PrivateRoute path='/about' component={About}/>
         <PrivateRoute path='/add' component={AddItem}/>
-        <PrivateRoute path='/month' component={Calendar}/>
+        <PrivateRoute path='/month' component={Month}/>
         <PrivateRoute path='/week' component={Week}/>
         <PrivateRoute path='/today' component={Today}/>
         </Container>
