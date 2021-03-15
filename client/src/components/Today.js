@@ -3,18 +3,21 @@ import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems, setSelectedDate } from "../actions";
 import { Container, Grid, List } from "semantic-ui-react";
+import { useParams } from "react-router";
 
 export default function Today() {
     const dispatch = useDispatch()
+    const { date } = useParams()
 
     const items = Object.values(useSelector(state => state.items))
     const {loginData} = useSelector(state => state.auth)
     
     useEffect(()=> {
+        if(date) setCurrentDay(new Date(date))
         dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
-        dispatch(getItems(userId,access_token))}},[dispatch,loginData])
+        dispatch(getItems(userId,access_token))}},[dispatch,loginData, date])
 
 
     const [currentDay, setCurrentDay] = useState(new Date())

@@ -12,7 +12,6 @@ import Month from './Month'
 import Week from './Week'
 import Today from './Today'
 
-
 export default function App() {
     return(
         <>
@@ -24,7 +23,8 @@ export default function App() {
         <PrivateRoute path='/add' component={AddItem}/>
         <PrivateRoute path='/month' component={Month}/>
         <PrivateRoute path='/week' component={Week}/>
-        <PrivateRoute path='/today' component={Today}/>
+        <PrivateRoute exact path='/today/:date' component={Today}/>
+        <PrivateRoute exact path='/today/' component={Today}/>
         </Container>
         </Router>
         </>

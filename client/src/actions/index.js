@@ -36,9 +36,8 @@ export const addItem = (formValues,accessToken) => async dispatch => {
         'headers': {
           'Authorization': `Bearer ${accessToken}`}
       })
-    console.log(response)
     dispatch({type: ADD_ITEM, payload: response.data})
-    history.push('/today')
+    history.push(`/today/:${formValues.date}`)
 } 
 
 export const updateItem = id => async dispatch => {

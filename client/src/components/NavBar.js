@@ -10,8 +10,6 @@ export default function NavBar() {
 
     const location = useLocation()
 
-    console.log(location.pathname)
-
     const handleSingOut = () => {
       dispatch(signOut())
       history.push('/')

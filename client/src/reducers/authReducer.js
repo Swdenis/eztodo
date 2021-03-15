@@ -4,7 +4,6 @@ import { LOGIN, SIGN_OUT} from "../actions/types";
 export default (state={}, action) => {
     switch(action.type) {
         case LOGIN:
-            console.log({loginData:action.payload})
             return({...state,loginData:action.payload})
         case SIGN_OUT:
             return({})
