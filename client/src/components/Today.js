@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems, setSelectedDate } from "../actions";
-import { Container, Grid, List } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import { useParams } from "react-router";
-import DoneDeleteButtons from "./DoneDeleteButtons";
+import ItemList from "./ItemList";
 
 export default function Today() {
 
@@ -58,53 +58,10 @@ export default function Today() {
             </div>)
     }
 
-    const handelShowEditItems = (e) => {
-        setActiveItemId(e.target.id)
-        setShowEditItems(true)
-    }
-
-    const [showEditItems, setShowEditItems] = useState(false)
-
-    const [activeItemId, setActiveItemId] = useState(null)
-
-    const handleMouseLeave =() => {
-        setShowEditItems(false)
-        setActiveItemId(null)
-    }
-
-    const renderListOfItems = (todayItems) => {
-        return(
-            <List bulleted verticalAlign='middle' style={{fontSize:"20px"}}>
-                {
-                todayItems.map(item => 
-                    <List.Item 
-                    key={item.id}
-                    id={item.id} 
-                    onMouseEnter={e => handelShowEditItems(e)}
-                    onMouseLeave={handleMouseLeave}
-                    className={item.isDone ? 'isDone': ''}
-                    >
-                        <List.Content 
-                        style={{display:"inline"}}
-                        >
-                        {item.body}
-                        </List.Content>
-                        {showEditItems && activeItemId === item.id ?
-                            <List.Content
-                            style={{display:"inline",position: "absolute", left:"200px"}}>
-                                <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={item} />
-                            </List.Content> 
-                        : null}
-                 
-                    </List.Item>
-                    )
-                }
-        </List>)}
-
     const renderDay = (items) => {
         const todayItems = items.filter(item => 
             dateFns.isSameDay(new Date(item.date),currentDay))
-        if(todayItems.length > 0) return(renderListOfItems(todayItems))
+        if(todayItems.length > 0) return(<ItemList loginData={loginData} items={todayItems}/>)
         return(
         <Container
         position="center"
