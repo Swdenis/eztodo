@@ -16,9 +16,13 @@ export default function DoneDeleteButtons({item, loginData,activeItemId}) {
     }
 
     const handleDelete= () => {
-        dispatch(deleteItem(activeItemId,loginData.access_token))
-        alert("You deleted the to-do item")
+        if(window.confirm("Delete this item?"))
+        {
+        dispatch(deleteItem(activeItemId, loginData.access_token))
+        alert("You deleted the item")
+        }
     }
+
         return(
         !item.isDone 
         ?
