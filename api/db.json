@@ -142,7 +142,8 @@
       "body": "Test",
       "date": "2021-03-16",
       "userId": "1",
-      "id": "44fXQE_"
+      "id": "44fXQE_",
+      "isDone": false
     },
     {
       "body": "Test",
@@ -184,7 +185,8 @@
       "body": "test",
       "date": "2021-03-18",
       "userId": "1",
-      "id": "YB365Qi"
+      "id": "YB365Qi",
+      "isDone": true
     },
     {
       "body": "SUPERNFIOA;NFDAOJFNAS;DBFJDAIBGFG",

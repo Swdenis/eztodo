@@ -16,6 +16,15 @@ export const setSelectedDate = (date) => {
     return {type: SET_SELECTED_DATE, payload: new Date(date)}
 }
 
+export const setItemDone = (item, accessToken) => async (dispatch) => {
+    const response = await items.patch(`/items/${item.id}`,item,{
+        'headers': {
+          'Authorization': `Bearer ${accessToken}`}
+      })
+    console.log(response.data)
+    dispatch({type: UPDATE_ITEM, payload: response.data})
+}
+
 export const tryLogIn = (values) => async dispatch => {
         const response = await login.post('/login', values).catch(error=> toast.error(error.message))
         dispatch({type: LOGIN, payload: response.data})  
@@ -48,7 +57,7 @@ export const updateItem = id => async dispatch => {
 }
 
 export const deleteItem = (itemId, accessToken)=> async (dispatch,getState) => {
-    const response = await items.delete(`/items/${itemId}`,{
+    await items.delete(`/items/${itemId}`,{
         'headers': {
           'Authorization': `Bearer ${accessToken}`}
     })

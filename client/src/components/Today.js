@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, setSelectedDate, deleteItem } from "../actions";
-import { Container, Grid, Icon, List } from "semantic-ui-react";
+import { getItems, setSelectedDate } from "../actions";
+import { Container, Grid, List } from "semantic-ui-react";
 import { useParams } from "react-router";
+import DoneDeleteButtons from "./DoneDeleteButtons";
 
 export default function Today() {
+
     const dispatch = useDispatch()
     const { date } = useParams()
 
@@ -65,11 +67,6 @@ export default function Today() {
 
     const [activeItemId, setActiveItemId] = useState(null)
 
-    const handleDelete= () => {
-        dispatch(deleteItem(activeItemId,loginData.access_token))
-        alert("You deleted the to-do item")
-    }
-
     const handleMouseLeave =() => {
         setShowEditItems(false)
         setActiveItemId(null)
@@ -85,16 +82,17 @@ export default function Today() {
                     id={item.id} 
                     onMouseEnter={e => handelShowEditItems(e)}
                     onMouseLeave={handleMouseLeave}
+                    className={item.isDone ? 'isDone': ''}
                     >
                         <List.Content 
-                        style={{display:"inline"}}>
+                        style={{display:"inline"}}
+                        >
                         {item.body}
                         </List.Content>
                         {showEditItems && activeItemId === item.id ?
                             <List.Content
                             style={{display:"inline",position: "absolute", left:"200px"}}>
-                                    <Icon color="green" name='check' />
-                                    <Icon color="red" onClick={handleDelete} name='delete'/>
+                                <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={item} />
                             </List.Content> 
                         : null}
                  

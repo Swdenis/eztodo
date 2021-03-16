@@ -22,11 +22,10 @@ export default function AddItem() {
     return(
         <Formik
             validationSchema={validationSchema}
-            initialValues={{ body: '', date: dateFns.format(selectedDate,'yyyy-MM-dd'), userId: userId }}
+            initialValues={{ body: '', date: dateFns.format(selectedDate,'yyyy-MM-dd'), userId: userId, isDone: false }}
             onSubmit={(values, { setSubmitting }) => {
                 dispatch(addItem(values,access_token))
                 setSubmitting(false)
-                console.log(values)
                 history.push('/today')
             }
         }

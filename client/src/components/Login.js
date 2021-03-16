@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn, tryLogIn } from '../actions';
 import * as Yup from 'yup' 
-import { Button, Container, Header, Segment, FormGroup } from 'semantic-ui-react';
+import { Button, Container, Header } from 'semantic-ui-react';
 import history from '../history'
 import MyTextInput from './MyTextInput';
 

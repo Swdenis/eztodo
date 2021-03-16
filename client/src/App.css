@@ -264,3 +264,7 @@ main {
 }
 
 /*end home page styles*/
+
+.isDone {
+  color:#a6a5a1!important;
+}
