@@ -36,16 +36,16 @@ export default function DailyItem({item}) {
         onMouseLeave={handleMouseLeave}
         className={item.isDone ? 'isDone': ''}
         >
-             <List.Content 
-            style={{display:"inline"}}
-            >
-                {item.body}
-            </List.Content>
-            {showEditItems && activeItemId === item.id ?
             <List.Content
-            style={{display:"inline",position: "flex", justifyContent:"flex-end", flexDirection:"row"}}>
-                <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={item} />
-            </List.Content> 
-            : null}
+            style={{display:"flex", justifyContent:"space-between"}}>
+                <List.Content style={{flexBasis:"70%",overflow:"hidden",overflowWrap: "break-word"}}>
+                {item.body}
+                </List.Content>
+                <List.Content>
+                {showEditItems && activeItemId === item.id ?
+                    <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={item} />
+                : null}
+                </List.Content>
+            </List.Content>
         </List.Item>)
 }

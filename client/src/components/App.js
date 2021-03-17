@@ -16,16 +16,16 @@ export default function App() {
     return(
         <>
         <Router history={history} >
-        <ToastContainer position='bottom-right' hideProgressBar />
-        <Container>
-        <Route path='/' exact component={Login}/>
-        <PrivateRoute path='/' component={NavBar}/>
-        <PrivateRoute exact path='/add' component={AddItem}/>
-        <PrivateRoute path='/month' component={Month}/>
-        <PrivateRoute path='/week' component={Week}/>
-        <PrivateRoute exact path='/today/:date' component={Today}/>
-        <PrivateRoute exact path='/today/' component={Today}/>
-        </Container>
+            <ToastContainer position='bottom-right' hideProgressBar />
+            <Container>
+                <Route path='/' exact component={Login}/>
+                <PrivateRoute path='/' component={NavBar}/>
+                <PrivateRoute exact path='/add' component={AddItem}/>
+                <PrivateRoute path='/month' component={Month}/>
+                <PrivateRoute path='/week' component={Week}/>
+                <PrivateRoute exact path='/today/:date' component={Today}/>
+                <PrivateRoute exact path='/today/' component={Today}/>
+            </Container>
         </Router>
         </>
         )     

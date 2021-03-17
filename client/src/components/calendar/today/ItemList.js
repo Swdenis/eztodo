@@ -29,16 +29,17 @@ export default function ItemList({loginData,items}) {
                 className={item.isDone ? 'isDone': ''}
                 >
                     <List.Content 
-                    style={{display:"inline"}}
+                    style={{display:"flex", justifyContent:"space-between"}}
                     >
+                    <List.Content style={{flexBasis:"70%"}}>
                     {item.body}
                     </List.Content>
                     {showEditItems && activeItemId === item.id ?
-                        <List.Content
-                        style={{display:"inline",position: "absolute", left:"200px"}}>
+                        <List.Content>
                             <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={item} />
                         </List.Content> 
                     : null}
+                    </List.Content>
                 
                 </List.Item>
                 )

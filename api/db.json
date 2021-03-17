@@ -40,7 +40,8 @@
       "body": "test",
       "date": "2021-03-19",
       "userId": "1",
-      "id": "4N03GYa"
+      "id": "4N03GYa",
+      "isDone": false
     },
     {
       "body": "TEST",
@@ -207,13 +208,6 @@
       "userId": "1",
       "isDone": false,
       "id": "PlDgBZi"
-    },
-    {
-      "body": "test 1234",
-      "date": "2021-03-17",
-      "userId": "1",
-      "isDone": false,
-      "id": "8NEfITb"
     },
     {
       "body": "test 123",
