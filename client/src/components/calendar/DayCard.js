@@ -15,7 +15,7 @@ export default function DayCard({day,items}) {
                 items.map(item => 
                     <List.Item key={item.id}>
                         <List.Icon name='check' size="small"
-                        style={{"color": "#1a8fff","padding-top":"3px","margin-right":"3px"}}/>
+                        style={{"color": "#1a8fff","paddingTop":"3px","margin-right":"3px"}}/>
                         {item.body}
                     </List.Item>)
                 : <Container>No tasks for this day yet</Container>

@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Container, Grid } from "semantic-ui-react";
-import { getItems, setSelectedDate } from "../../actions";
-import ItemList from "../toDoItems/ItemList";
+import { getItems, setSelectedDate } from "../../../actions";
+import ItemList from "./ItemList";
+import TodayHeader from "./TodayHeader";
 
 export default function Today() {
 
@@ -26,38 +27,6 @@ export default function Today() {
 
     const [currentDay, setCurrentDay] = useState(new Date())
 
-    const setNextDay = () => {
-        let date = dateFns.addDays(currentDay, 1)
-        setCurrentDay(date)
-        dispatch(setSelectedDate(date))
-    }
-
-    const setPrevDay = () => {
-        let date = dateFns.subDays(currentDay, 1)
-        setCurrentDay(date)
-        dispatch(setSelectedDate(date))
-    }
-
-    const renderHeader = () => {
-        const dateFormat = "iii, d MMMM yyyy";
-        return (
-            <div className="header row flex-middle">
-            <div className="col col-start">
-                <div className="icon" onClick={setPrevDay}>
-                chevron_left
-                </div>
-            </div>
-            <div className="col col-center">
-                <span>
-                {dateFns.format(currentDay, dateFormat)}
-                </span>
-            </div>
-            <div className="col col-end" onClick={setNextDay}>
-                <div className="icon">chevron_right</div>
-            </div>
-            </div>)
-    }
-
     const renderDay = (items) => {
         const todayItems = items.filter(item => 
             dateFns.isSameDay(new Date(item.date),currentDay))
@@ -76,7 +45,7 @@ export default function Today() {
         <Grid.Row>
         <Grid.Column width={16}>
         <div className='calendar'>
-            {renderHeader()}
+            <TodayHeader currentDay={currentDay} setCurrentDay={setCurrentDay}/>
         </div>
         </Grid.Column>
         </Grid.Row>

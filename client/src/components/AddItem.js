@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { Button, Header } from 'semantic-ui-react';
 import history from '../history';
 import * as dateFns from "date-fns";
+import { useParams } from 'react-router';
 
 export default function AddItem() {
 
@@ -18,6 +19,8 @@ export default function AddItem() {
         body: Yup.string().required(),
     })
 
+    const { date } = useParams()
+
     const dispatch = useDispatch()
     return(
         <Formik
@@ -26,7 +29,6 @@ export default function AddItem() {
             onSubmit={(values, { setSubmitting }) => {
                 dispatch(addItem(values,access_token))
                 setSubmitting(false)
-                history.push('/today')
             }
         }
         >
@@ -60,6 +62,9 @@ export default function AddItem() {
            {errors.password && touched.password && errors.password}
            <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit
+           </Button>
+           <Button style={{marginTop:"10px"}} onClick={()=>history.goBack()} disabled={isSubmitting}>
+             Cancel
            </Button>
          </Form>
        )}

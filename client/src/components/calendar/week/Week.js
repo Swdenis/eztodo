@@ -1,9 +1,9 @@
 import * as dateFns from "date-fns";
-import dateFormat from "dateformat";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { List } from "semantic-ui-react";
-import { getItems, setSelectedDate } from "../../actions";
+import { getItems, setSelectedDate } from "../../../actions";
+import RowOfDailyItems from "./RowOfDailyItems";
+import WeekHeader from "./WeekHeader";
 
 export default function Week() {
     const dispatch = useDispatch()
@@ -25,52 +25,6 @@ export default function Week() {
     const onDateClick = day => {
         setSelectedWeekday(day)
         dispatch(setSelectedDate(day))
-    }
-
-    const setNextWeek = () => {
-        setCurrentWeek(dateFns.addWeeks(currentWeek, 1))
-    }
-
-    const setPrevWeek = () => {
-        setCurrentWeek(dateFns.subWeeks(currentWeek, 1))
-    }
-
-    const renderHeader = () => {
-        const nextWeek = dateFns.addWeeks(currentWeek,1)
-        return (
-            <div className="header row flex-middle">
-            <div className="col col-start">
-                <div className="icon" onClick={setPrevWeek}>
-                chevron_left
-                </div>
-            </div>
-            <div className="col col-center">
-                {
-                !dateFns.isSameMonth(currentWeek,nextWeek) 
-                ?
-                <>
-                <span>
-                {dateFormat(currentWeek,  "dd mmm")}
-                </span>
-                <span>
-                {dateFormat(nextWeek, "-dd mmm")}
-                </span>
-                </>
-                :
-                <>
-                <span>
-                {dateFormat(currentWeek,  "dd")}
-                </span>
-                <span>
-                {dateFormat(nextWeek, "-dd mmm")}
-                </span>
-                </>
-                }
-            </div>
-            <div className="col col-end" onClick={setNextWeek}>
-                <div className="icon">chevron_right</div>
-            </div>
-            </div>)
     }
 
     const renderDays = () => {
@@ -146,34 +100,17 @@ export default function Week() {
             : ''
         )
     }
-    const renderItemsToDo = () => {
-        return(
-            <div className="row" id="itemsRow">
-            {itemsToDo.map(itemArray => 
-                <div className='col' key={itemsToDo.indexOf(itemArray)}>
-                        <List verticalAlign='middle'>
-                            {itemArray.map(item =>
-                                        <List.Item key={item.id} style={{"padding-top":"10px"}}>
-                                            <List.Icon centered size='small' name='check' style={{
-                                                "color": "#1a8fff","padding-top":"3px","margin-right":"3px"}}/>
-                                            {item.body}
-                                        </List.Item>)
-                            }
-                        </List>
-                </div>
-            )}
-            </div>   
-    )}
 
     return (
         <>
         <div className='calendar'>
-            {renderHeader()}
+            <WeekHeader setCurrentWeek={setCurrentWeek} currentWeek={currentWeek} />
             {renderDays()}
             {renderCells()}
-            
         </div>
-            {renderItemsToDo()}
+            <RowOfDailyItems items={itemsToDo}/>
         </>
     )
 }
+
+

@@ -31,7 +31,7 @@ export default function Login() {
         <Container textAlign='center' text className='masthead'>
         <Formik
             validationSchema={validationSchema}
-            initialValues={{ email: 'test@test.com', password: 'test123' }}
+            initialValues={{ email: 'test@test.com', password: 'fipadnfio3289bJOASODB' }}
             onSubmit={(values, { setSubmitting }) => {
                 dispatch(tryLogIn(values))
                 setSubmitting(false)

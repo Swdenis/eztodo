@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
-import { deleteItem, setItemDone } from "../../actions";
+import { deleteItem, setItemDone } from "../../../actions";
 
 export default function DoneDeleteButtons({item, loginData,activeItemId}) {
 
