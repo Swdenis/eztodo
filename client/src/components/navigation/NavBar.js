@@ -1,9 +1,9 @@
 import React from 'react'
-import {Button, Container, Menu} from 'semantic-ui-react'
-import {NavLink, useLocation} from 'react-router-dom'
-import { signOut } from '../actions'
-import history from '../history'
 import { useDispatch } from 'react-redux'
+import { NavLink, useLocation } from 'react-router-dom'
+import { Button, Container, Menu } from 'semantic-ui-react'
+import { signOut } from '../../actions'
+import history from '../../history'
 
 export default function NavBar() {
     const dispatch = useDispatch()

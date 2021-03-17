@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, setSelectedDate } from "../actions";
-import { Container, Grid } from "semantic-ui-react";
 import { useParams } from "react-router";
-import ItemList from "./ItemList";
+import { Container, Grid } from "semantic-ui-react";
+import { getItems, setSelectedDate } from "../../actions";
+import ItemList from "../toDoItems/ItemList";
 
 export default function Today() {
 

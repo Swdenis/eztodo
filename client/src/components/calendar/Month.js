@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, setSelectedDate } from "../actions";
-import dateFormat from "dateformat"
-import { List } from "semantic-ui-react";
+import { getItems, setSelectedDate } from "../../actions";
+import DayCard from "./DayCard";
+import { Popup } from "semantic-ui-react";
 
-export default function Week() {
+export default function Month() {
     const dispatch = useDispatch()
 
     const items = Object.values(useSelector(state => state.items))
@@ -18,56 +18,37 @@ export default function Week() {
         dispatch(getItems(userId,access_token))}},[dispatch,loginData])
 
 
-    const [currentWeek, setCurrentWeek] = useState(dateFns.startOfWeek(new Date()))
-    const [selectedWeekday, setSelectedWeekday] = useState(new Date())
-    const itemsToDo = []
+    const [currentMonth, setCurrentMonth] = useState(new Date())
+    const [selectedMonthDate, setSelectedMonthDate] = useState(new Date())
 
     const onDateClick = day => {
-        setSelectedWeekday(day)
+        setSelectedMonthDate(day)
         dispatch(setSelectedDate(day))
     }
 
-    const setNextWeek = () => {
-        setCurrentWeek(dateFns.addWeeks(currentWeek, 1))
+    const nextMonth = () => {
+        setCurrentMonth(dateFns.addMonths(currentMonth, 1))
     }
 
-    const setPrevWeek = () => {
-        setCurrentWeek(dateFns.subWeeks(currentWeek, 1))
+    const prevMonth = () => {
+        setCurrentMonth(dateFns.subMonths(currentMonth, 1))
     }
 
     const renderHeader = () => {
-        const nextWeek = dateFns.addWeeks(currentWeek,1)
+        const dateFormat = "MMMM yyyy";
         return (
             <div className="header row flex-middle">
             <div className="col col-start">
-                <div className="icon" onClick={setPrevWeek}>
+                <div className="icon" onClick={prevMonth}>
                 chevron_left
                 </div>
             </div>
             <div className="col col-center">
-                {
-                !dateFns.isSameMonth(currentWeek,nextWeek) 
-                ?
-                <>
                 <span>
-                {dateFormat(currentWeek,  "dd mmm")}
+                {dateFns.format(currentMonth, dateFormat)}
                 </span>
-                <span>
-                {dateFormat(nextWeek, "-dd mmm")}
-                </span>
-                </>
-                :
-                <>
-                <span>
-                {dateFormat(currentWeek,  "dd")}
-                </span>
-                <span>
-                {dateFormat(nextWeek, "-dd mmm")}
-                </span>
-                </>
-                }
             </div>
-            <div className="col col-end" onClick={setNextWeek}>
+            <div className="col col-end" onClick={nextMonth}>
                 <div className="icon">chevron_right</div>
             </div>
             </div>)
@@ -76,7 +57,7 @@ export default function Week() {
     const renderDays = () => {
         const dateFormat = "iiii";
         const days = [];
-        let startDate = dateFns.startOfWeek(currentWeek);
+        let startDate = dateFns.startOfWeek(currentMonth);
         for (let i = 0; i < 7; i++) {
         days.push(
         <div className="col col-center" key={i}>
@@ -85,9 +66,11 @@ export default function Week() {
         )}
         return <div className="days row">{days}</div>}
 
-    const renderCells = () => {
-        const startDate = dateFns.startOfWeek(currentWeek);
-        const endDate = dateFns.endOfWeek(currentWeek);
+        const renderCells = () => {
+        const monthStart = dateFns.startOfMonth(currentMonth);
+        const monthEnd = dateFns.endOfMonth(monthStart);
+        const startDate = dateFns.startOfWeek(monthStart);
+        const endDate = dateFns.endOfWeek(monthEnd);
 
         const dateFormat = "d";
         const rows = [];
@@ -100,13 +83,14 @@ export default function Week() {
             const cloneDay = day;
             let thingsToDo = items.filter(item => 
                 dateFns.isSameDay(new Date(item.date), cloneDay))
-            itemsToDo.push(thingsToDo)
             days.push(
-            <div
+            <Popup
+            trigger={
+                <div
                 className={`col cell ${
-                !dateFns.isSameWeek(day, startDate)
+                !dateFns.isSameMonth(day, monthStart)
                     ? "disabled"
-                    : dateFns.isSameDay(day, selectedWeekday) ? "selected" : ""
+                    : dateFns.isSameDay(day, selectedMonthDate) ? "selected" : ""
                 }`}
                 key={day}
                 onClick={() => onDateClick(dateFns.toDate(cloneDay))}
@@ -115,6 +99,11 @@ export default function Week() {
                 <span className="number">{formattedDate}</span>
                 <span className="bg">{formattedDate}</span>
             </div>
+            }>
+                <Popup.Content>
+                    <DayCard day={cloneDay} items = {thingsToDo} />
+                    </Popup.Content>
+            </Popup>  
             );
             day = dateFns.addDays(day, 1)
         }
@@ -146,34 +135,11 @@ export default function Week() {
             : ''
         )
     }
-    const renderItemsToDo = () => {
-        return(
-            <div className="row" id="itemsRow">
-            {itemsToDo.map(itemArray => 
-                <div className='col' key={itemsToDo.indexOf(itemArray)}>
-                        <List verticalAlign='middle'>
-                            {itemArray.map(item =>
-                                        <List.Item key={item.id} style={{"padding-top":"10px"}}>
-                                            <List.Icon centered size='small' name='check' style={{
-                                                "color": "#1a8fff","padding-top":"3px","margin-right":"3px"}}/>
-                                            {item.body}
-                                        </List.Item>)
-                            }
-                        </List>
-                </div>
-            )}
-            </div>   
-    )}
-
     return (
-        <>
-        <div className='calendar'>
-            {renderHeader()}
-            {renderDays()}
-            {renderCells()}
-            
-        </div>
-            {renderItemsToDo()}
-        </>
+      <div className='calendar'>
+        {renderHeader()}
+        {renderDays()}
+        {renderCells()}
+      </div>
     )
 }
