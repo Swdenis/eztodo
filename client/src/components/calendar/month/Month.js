@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems, setSelectedDate } from "../../../actions";
-import DayCard from "../DayCard";
+import DayCard from "./DayCard";
 import { Popup } from "semantic-ui-react";
+import ThingsToDo from "../common/ThingsToDo";
 
 export default function Month() {
     const dispatch = useDispatch()
@@ -85,6 +86,7 @@ export default function Month() {
                 dateFns.isSameDay(new Date(item.date), cloneDay))
             days.push(
             <Popup
+            hoverable
             trigger={
                 <div
                 className={`col cell ${
@@ -95,12 +97,12 @@ export default function Month() {
                 key={day}
                 onClick={() => onDateClick(dateFns.toDate(cloneDay))}
             >
-                {renderCountThingsToDo(thingsToDo,cloneDay)}
+                <ThingsToDo thingsToDo={thingsToDo} cloneDay={cloneDay} />
                 <span className="number">{formattedDate}</span>
                 <span className="bg">{formattedDate}</span>
             </div>
             }>
-                <Popup.Content>
+            <Popup.Content>
                     <DayCard day={cloneDay} items = {thingsToDo} />
                     </Popup.Content>
             </Popup>  
@@ -117,24 +119,6 @@ export default function Month() {
         return <div className="body">{rows}</div>
     }
 
-    const renderCountThingsToDo = (thingsToDo,cloneDay) => {
-        return(
-        dateFns.isSameDay(new Date(thingsToDo[0]?.date), dateFns.toDate(cloneDay))
-            ?
-        <span className="countThingsToDo">
-        <span
-        style={
-            thingsToDo.length > 5 ?
-            {'color':'red'}
-            : thingsToDo.length > 2 ? {'color':'orange'}
-            : {'color':'green'}
-        }
-        >{thingsToDo.length}</span>
-        {thingsToDo.length > 1 ? " things to do" : " thing to do"}
-        </span> 
-            : ''
-        )
-    }
     return (
       <div className='calendar'>
         {renderHeader()}

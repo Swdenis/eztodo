@@ -2,6 +2,7 @@ import * as dateFns from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems, setSelectedDate } from "../../../actions";
+import ThingsToDo from "../common/ThingsToDo";
 import RowOfDailyItems from "./RowOfDailyItems";
 import WeekHeader from "./WeekHeader";
 
@@ -65,7 +66,7 @@ export default function Week() {
                 key={day}
                 onClick={() => onDateClick(dateFns.toDate(cloneDay))}
             >
-                {renderCountThingsToDo(thingsToDo,cloneDay)}
+                 <ThingsToDo thingsToDo={thingsToDo} cloneDay={cloneDay} />
                 <span className="number">{formattedDate}</span>
                 <span className="bg">{formattedDate}</span>
             </div>
@@ -80,25 +81,6 @@ export default function Week() {
         days = [];
         }
         return <div className="body">{rows}</div>
-    }
-
-    const renderCountThingsToDo = (thingsToDo,cloneDay) => {
-        return(
-        dateFns.isSameDay(new Date(thingsToDo[0]?.date), dateFns.toDate(cloneDay))
-            ?
-        <span className="countThingsToDo">
-        <span
-        style={
-            thingsToDo.length > 5 ?
-            {'color':'red'}
-            : thingsToDo.length > 2 ? {'color':'orange'}
-            : {'color':'green'}
-        }
-        >{thingsToDo.length}</span>
-        {thingsToDo.length > 1 ? " things to do" : " thing to do"}
-        </span> 
-            : ''
-        )
     }
 
     return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { List } from 'semantic-ui-react'
-import DoneDeleteButtons from './DoneDeleteButtons'
+import DoneDeleteButtons from '../common/DoneDeleteButtons'
 
 export default function ItemList({loginData,items}) {
 

@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { List } from 'semantic-ui-react';
-import DoneDeleteButtons from '../today/DoneDeleteButtons';
+import DoneDeleteButtons from '../common/DoneDeleteButtons';
 
 export default function DailyItem({item}) {
 
     const {loginData} = useSelector(state => state.auth)
-
-    function truncate(str) {
-        if(str) {
-            return str.length > 17 ? str.substring(0,17)+'...' : str
-        }
-    }
 
     const handelShowEditItems = (e) => {
         setActiveItemId(e.target.id)
@@ -37,7 +31,7 @@ export default function DailyItem({item}) {
         className={item.isDone ? 'isDone': ''}
         >
             <List.Content
-            style={{display:"flex", justifyContent:"space-between"}}>
+            style={{display:"flex", justifyContent:"space-between",color:'black'}}>
                 <List.Content style={{flexBasis:"70%",overflow:"hidden",overflowWrap: "break-word"}}>
                 {item.body}
                 </List.Content>
