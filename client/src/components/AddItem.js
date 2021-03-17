@@ -6,11 +6,10 @@ import * as Yup from 'yup'
 import { Button, Header } from 'semantic-ui-react';
 import history from '../history';
 import * as dateFns from "date-fns";
-import { useParams } from 'react-router';
-
 export default function AddItem() {
 
     const {loginData: {userId, access_token}} = useSelector(state => state.auth)
+    
     const {selectedDate} = useSelector(state => state.selectedDate)
 
     const validationSchema = Yup.object(
@@ -18,8 +17,6 @@ export default function AddItem() {
         date: Yup.date().required(),
         body: Yup.string().required(),
     })
-
-    const { date } = useParams()
 
     const dispatch = useDispatch()
     return(

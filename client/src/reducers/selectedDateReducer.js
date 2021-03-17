@@ -1,4 +1,4 @@
-import { SET_SELECTED_DATE,DISCARD_SELECTED_DATE } from "../actions/types"
+import { SET_SELECTED_DATE } from "../actions/types"
 
 export default (state={}, action) => {
     switch(action.type) {

@@ -2,13 +2,22 @@ import { Card, Container, List } from "semantic-ui-react"
 import * as dateFns from "date-fns";
 import DailyItem from "../week/DailyItem";
 import history from "../../../history";
+import { useDispatch } from "react-redux";
+import { setSelectedDate } from "../../../actions";
 
 export default function DayCard({day,items}) {
+
+    const dispatch = useDispatch()
+
+    const handleAddItem = () => {
+        dispatch(setSelectedDate(day))
+        history.push('/add')
+    }
 
     return(
         <Card>
             <Card.Content>
-                <i style={{cursor: "pointer"}} onClick={()=> history.push('/add')} 
+                <i style={{cursor: "pointer"}} onClick={handleAddItem} 
                 className="right floated large green plus circle icon" />
                 <Card.Header>
                 {dateFns.format(day, "iii, d MMMM")}
