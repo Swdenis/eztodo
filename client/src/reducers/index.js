@@ -3,6 +3,7 @@ import isSignedInReducer from './isSignedInReducer';
 import itemReducer from './itemReducer';
 import authReducer from './authReducer';
 import selectedDateReducer from './selectedDateReducer';
+import modalReducer from './modalReducer';
 
 export default combineReducers(
     {
@@ -10,5 +11,6 @@ export default combineReducers(
         auth: authReducer,
         isSignedIn: isSignedInReducer,
         selectedDate: selectedDateReducer,
+        modal: modalReducer
     }
 )

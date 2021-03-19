@@ -4,6 +4,7 @@ import DailyItem from "../week/DailyItem";
 import history from "../../../history";
 import { useDispatch } from "react-redux";
 import { setSelectedDate } from "../../../actions";
+import { toggleAddItemModel } from "../../../actions/modal";
 
 export default function DayCard({day,items}) {
 
@@ -11,7 +12,8 @@ export default function DayCard({day,items}) {
 
     const handleAddItem = () => {
         dispatch(setSelectedDate(day))
-        history.push('/add')
+        dispatch(toggleAddItemModel())
+        history.push('add')
     }
 
     return(

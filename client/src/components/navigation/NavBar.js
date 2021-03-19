@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Button, Container, Menu } from 'semantic-ui-react'
 import { signOut } from '../../actions'
+import { toggleAddItemModel } from '../../actions/modal'
 import history from '../../history'
 
 export default function NavBar() {
@@ -20,7 +21,8 @@ export default function NavBar() {
     <Menu secondary>
         <Menu.Item as={NavLink} to='/today' content="My to-do list"/>
         <Menu.Item>
-            <Button positive disabled={location.pathname === "/add"} as={NavLink} to='/add' content="Add item"/>
+            <Button positive disabled={location.pathname === "/add"} 
+            as={NavLink} to='/add' content="Add item" onClick={()=>dispatch(toggleAddItemModel())}/>
         </Menu.Item>
         <Menu.Item position="right">
             <Button onClick={handleSingOut} content="Log out" negative/>

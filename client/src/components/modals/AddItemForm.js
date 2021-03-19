@@ -1,12 +1,13 @@
 import React from 'react'
 import { Formik,Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../actions';
+import { addItem } from '../../actions';
 import * as Yup from 'yup' 
 import { Button, Header } from 'semantic-ui-react';
-import history from '../history';
+import history from '../../history';
 import * as dateFns from "date-fns";
-export default function AddItem() {
+
+export default function AddItem({toggleModal}) {
 
     const {loginData: {userId, access_token}} = useSelector(state => state.auth)
     
@@ -37,7 +38,7 @@ export default function AddItem() {
          isValid
        }) => (
          <Form className='ui form error' onSubmit={handleSubmit}>
-            <Header as='h2' textAlign='center' content='Add new to-do item' />
+            <Header as='h2' textAlign='center' content='' />
             <Field 
              type="date"
              name="date"
@@ -57,10 +58,10 @@ export default function AddItem() {
            />
            {errors.email && touched.email && errors.email}
            {errors.password && touched.password && errors.password}
-           <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
+           <Button style={{marginTop:"10px"}} positive type="submit" onClick={toggleModal} disabled={isSubmitting}>
              Submit
            </Button>
-           <Button style={{marginTop:"10px"}} onClick={()=>history.goBack()} disabled={isSubmitting}>
+           <Button style={{marginTop:"10px"}} onClick={toggleModal} disabled={isSubmitting}>
              Cancel
            </Button>
          </Form>
