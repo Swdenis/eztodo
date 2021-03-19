@@ -46,14 +46,14 @@ export const addItem = (formValues,accessToken) => async dispatch => {
           'Authorization': `Bearer ${accessToken}`}
       })
     dispatch({type: ADD_ITEM, payload: response.data})
-    history.push(`/today/:${formValues.date}`)
+    history.push(`/todo/today/:${formValues.date}`)
 } 
 
 export const updateItem = id => async dispatch => {
     const response = await items.patch(`/items/${id}`)
     console.log(response)
     dispatch({type: UPDATE_ITEM, payload: response.data})
-    history.push('/today')
+    history.push('/todo/today')
 }
 
 export const deleteItem = (itemId, accessToken)=> async (dispatch,getState) => {
@@ -69,5 +69,5 @@ export const getItem = id => async dispatch => {
     const response = await items.get(`/items'/${id}`)
     console.log(response)
     dispatch({type: GET_ITEM, payload: response.data})
-    history.push('/today')
+    history.push('/todo/today')
 } 

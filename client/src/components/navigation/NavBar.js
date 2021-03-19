@@ -19,18 +19,13 @@ export default function NavBar() {
     return(
     <Container>
     <Menu secondary>
-        <Menu.Item as={NavLink} to='/today' content="My to-do list"/>
-        <Menu.Item content="My meetings"/>
-        <Menu.Item content="My deadlines"/>
+        <Menu.Item as={NavLink} to='/todo/today' content="My to-do list"/>
+        <Menu.Item as={NavLink} to='/meetings' content="My meetings"/>
+        <Menu.Item as={NavLink} to='/deadlines' content="My deadlines"/>
         <Menu.Item position="right">
             <Button onClick={handleSingOut} content="Log out" negative/>
         </Menu.Item>
     </Menu>
-    <Menu text>
-        <Menu.Item as={NavLink} to='/today' content="Today"/>
-        <Menu.Item as={NavLink} to='/week' content="This week"/>
-        <Menu.Item as={NavLink} to='/month' content="This month"/>
-      </Menu>
     </Container>
     )
 

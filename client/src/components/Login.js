@@ -23,7 +23,7 @@ export default function Login() {
           if(loginData) {
             if(loginData.success === true) {
                 dispatch(signIn(loginData.userId))
-                history.push('/today')
+                history.push('/todo/today')
         }}
         },[loginData,dispatch])
    

@@ -11,6 +11,9 @@ import Month from './calendar/month/Month'
 import Week from './calendar/week/Week'
 import Today from './calendar/today/Today'
 import AddItemModal from './modals/AddItemModal'
+import Meetings from './meetings/Meetings'
+import ToDoNavBar from './navigation/ToDoNavBar'
+import Deadlines from './deadlines/Deadlines'
 
 export default function App() {
     return(
@@ -20,11 +23,14 @@ export default function App() {
             <Container>
                 <Route path='/' exact component={Login}/>
                 <PrivateRoute path='/' component={NavBar}/>
-                <PrivateRoute exact path='/add' component={AddItemModal}/>
-                <PrivateRoute path='/month' component={Month}/>
-                <PrivateRoute path='/week' component={Week}/>
-                <PrivateRoute exact path='/today/:date' component={Today}/>
-                <PrivateRoute exact path='/today/' component={Today}/>
+                <PrivateRoute path='/todo' component={ToDoNavBar}/>
+                <PrivateRoute exact path='/todo/add' component={AddItemModal}/>
+                <PrivateRoute path='/todo/month' component={Month}/>
+                <PrivateRoute path='/todo/week' component={Week}/>
+                <PrivateRoute exact path='/todo/today/:date' component={Today}/>
+                <PrivateRoute exact path='/todo/today/' component={Today}/>
+                <PrivateRoute exact path='/meetings/' component={Meetings}/>
+                <PrivateRoute exact path='/deadlines/' component={Deadlines}/>
             </Container>
         </Router>
         </>
