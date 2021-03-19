@@ -22,7 +22,12 @@ export default function AddItem({toggleModal}) {
     return(
         <Formik
             validationSchema={validationSchema}
-            initialValues={{ body: '', date: dateFns.format(selectedDate,'yyyy-MM-dd'), userId: userId, isDone: false }}
+            initialValues={{
+              body: '', 
+              date: dateFns.format(selectedDate,'yyyy-MM-dd'), 
+              userId: userId, 
+              isDone: false,
+              link:'' }}
             onSubmit={(values, { setSubmitting }) => {
                 dispatch(addItem(values,access_token))
                 setSubmitting(false)

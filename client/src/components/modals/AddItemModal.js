@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Modal } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 import { toggleAddItemModel } from '../../actions/modal'
 import history from '../../history'
 import AddItem from './AddItemForm'

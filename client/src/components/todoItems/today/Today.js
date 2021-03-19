@@ -46,8 +46,6 @@ export default function Today() {
             history.push('/todo/today/add')
         }
 
-    console.log(currentDay)
-
     return (
 
     <Grid columns={3}>

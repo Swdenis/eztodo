@@ -19,8 +19,6 @@ export default function TodayHeader({currentDay,setCurrentDay}) {
         dispatch(setSelectedDate(date))
     }
 
-    console.log(currentDay)
-
     const dateFormat = "iii, d MMMM yyyy";
     return (
         <div className="header row flex-middle">
