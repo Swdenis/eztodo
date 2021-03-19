@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { TOGGLE_ADD_ITEM_MODAL } from "../actions/types"
 
 const INITIAL_STATE = {

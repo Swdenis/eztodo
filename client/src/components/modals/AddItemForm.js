@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../actions';
 import * as Yup from 'yup' 
 import { Button, Header } from 'semantic-ui-react';
-import history from '../../history';
 import * as dateFns from "date-fns";
 
 export default function AddItem({toggleModal}) {

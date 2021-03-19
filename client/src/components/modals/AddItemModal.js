@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Modal } from 'semantic-ui-react'
 import { toggleAddItemModel } from '../../actions/modal'
