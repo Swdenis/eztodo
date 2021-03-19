@@ -20,10 +20,8 @@ export default function NavBar() {
     <Container>
     <Menu secondary>
         <Menu.Item as={NavLink} to='/today' content="My to-do list"/>
-        <Menu.Item>
-            <Button positive disabled={location.pathname === "/add"} 
-            as={NavLink} to='/add' content="Add item" onClick={()=>dispatch(toggleAddItemModel())}/>
-        </Menu.Item>
+        <Menu.Item content="My meetings"/>
+        <Menu.Item content="My deadlines"/>
         <Menu.Item position="right">
             <Button onClick={handleSingOut} content="Log out" negative/>
         </Menu.Item>
@@ -35,4 +33,6 @@ export default function NavBar() {
       </Menu>
     </Container>
     )
+
+
 }

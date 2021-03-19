@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Container, Grid } from "semantic-ui-react";
 import { getItems, setSelectedDate } from "../../../actions";
+import { toggleAddItemModel } from "../../../actions/modal";
+import history from "../../../history";
 import ItemList from "./ItemList";
 import TodayHeader from "./TodayHeader";
 
@@ -30,13 +32,19 @@ export default function Today() {
     const renderDay = (items) => {
         const todayItems = items.filter(item => 
             dateFns.isSameDay(new Date(item.date),currentDay))
-        if(todayItems.length > 0) return(<ItemList loginData={loginData} items={todayItems}/>)
+        if(todayItems.length > 0) return(
+        <ItemList loginData={loginData} items={todayItems}/>)
         return(
         <Container
         position="center"
         text
         style={{"fontSize": "140%"}}
         content="You don't have any tasks for today!"/>)
+        }
+
+    const handleAddItem = () => {
+            dispatch(toggleAddItemModel())
+            history.push('/add')
         }
 
     return (
@@ -52,6 +60,8 @@ export default function Today() {
         <Grid.Row>
                 <Grid.Column>
                 {renderDay(items)}
+                <i style={{cursor: "pointer"}} onClick={handleAddItem} 
+                className="big green plus circle icon" />
                 </Grid.Column>
                 <Grid.Column/>
                 <Grid.Column/>

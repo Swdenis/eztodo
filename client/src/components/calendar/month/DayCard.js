@@ -13,7 +13,7 @@ export default function DayCard({day,items}) {
     const handleAddItem = () => {
         dispatch(setSelectedDate(day))
         dispatch(toggleAddItemModel())
-        history.push('add')
+        history.push('/add')
     }
 
     return(
