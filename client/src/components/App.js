@@ -27,7 +27,6 @@ export default function App() {
                 <PrivateRoute path={'/todo/(.+)/add'} component={AddItemModal}/>
                 <PrivateRoute path='/todo/month' component={Month}/>
                 <PrivateRoute path='/todo/week' component={Week}/>
-                <PrivateRoute exact path='/todo/today/:date' component={Today}/>
                 <PrivateRoute exact path='/todo/today/' component={Today}/>
                 <PrivateRoute exact path='/meetings/' component={Meetings}/>
                 <PrivateRoute exact path='/deadlines/' component={Deadlines}/>

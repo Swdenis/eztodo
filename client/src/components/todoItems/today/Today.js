@@ -13,19 +13,17 @@ import TodayHeader from "./TodayHeader";
 export default function Today() {
 
     const dispatch = useDispatch()
-    const { date } = useParams()
 
     const items = Object.values(useSelector(state => state.items))
 
     const {loginData} = useSelector(state => state.auth)
     
     useEffect(()=> {
-        if(date) setCurrentDay(new Date(date))
-            dispatch(setSelectedDate(new Date()))
+        dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
             dispatch(getItems(userId, access_token)
-        )}},[dispatch, loginData, date])
+        )}},[dispatch, loginData])
 
 
     const [currentDay, setCurrentDay] = useState(new Date())

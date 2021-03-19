@@ -27,7 +27,7 @@ export const addItem = (formValues,accessToken) => async dispatch => {
           'Authorization': `Bearer ${accessToken}`}
       })
     dispatch({type: ADD_ITEM, payload: response.data})
-    history.push(`/todo/today/:${formValues.date}`)
+    history.goBack()
 } 
 
 export const updateItem = id => async dispatch => {
