@@ -103,5 +103,34 @@ server.get('/items/userId', (req, res) => {
       }
 })
 
+server.get('/meetings/userId', (req, res) => {
+
+  if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
+      const status = 401
+      const message = 'Error in authorization format'
+      res.status(status).json({status, message})
+      return
+    }
+    try {
+      let verifyTokenResult;
+       verifyTokenResult = verifyToken(req.headers.authorization.split(' ')[1]);
+  
+       if (verifyTokenResult instanceof Error) {
+         const status = 401
+         const message = 'Access token not provided'
+         res.status(status).json({status, message})
+         return
+       }
+      db = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
+      const userId = req.headers.userid
+      const meetings = db.meetings.filter(meeting=> meeting.userId === userId)
+      res.status(200).json(meetings)
+    } catch (err) {
+      const status = 401
+      const message = 'Error access_token is revoked'
+      res.status(status).json({status, message})
+    }
+})
+
 server.listen(port);
 server.use(router);

@@ -1,7 +1,8 @@
 import * as dateFns from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, setSelectedDate } from "../../../actions";
+import { getItems } from "../../../actions/toDo";
+import { setSelectedDate } from "../../../actions";
 import ThingsToDo from "../common/ThingsToDo";
 import RowOfDailyItems from "./RowOfDailyItems";
 import WeekHeader from "./WeekHeader";

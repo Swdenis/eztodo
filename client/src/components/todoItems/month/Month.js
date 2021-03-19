@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, setSelectedDate } from "../../../actions";
+import { getItems } from "../../../actions/toDo";
+import { setSelectedDate } from "../../../actions";
 import DayCard from "./DayCard";
 import { Popup } from "semantic-ui-react";
 import ThingsToDo from "../common/ThingsToDo";

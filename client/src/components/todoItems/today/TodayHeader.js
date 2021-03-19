@@ -3,8 +3,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setSelectedDate } from "../../../actions";
 
-
-
 export default function TodayHeader({currentDay,setCurrentDay}) {
 
     const dispatch = useDispatch()
@@ -21,21 +19,23 @@ export default function TodayHeader({currentDay,setCurrentDay}) {
         dispatch(setSelectedDate(date))
     }
 
+    console.log(currentDay)
+
     const dateFormat = "iii, d MMMM yyyy";
     return (
         <div className="header row flex-middle">
-        <div className="col col-start">
-            <div className="icon" onClick={setPrevDay}>
-            chevron_left
+            <div className="col col-start">
+                <div className="icon" onClick={setPrevDay}>
+                chevron_left
+                </div>
             </div>
-        </div>
-        <div className="col col-center">
-            <span>
-            {dateFns.format(currentDay, dateFormat)}
-            </span>
-        </div>
-        <div className="col col-end" onClick={setNextDay}>
-            <div className="icon">chevron_right</div>
-        </div>
+            <div className="col col-center">
+                <span>
+                {dateFns.format(currentDay, dateFormat)}
+                </span>
+            </div>
+            <div className="col col-end" onClick={setNextDay}>
+                <div className="icon">chevron_right</div>
+            </div>
         </div>)
 }

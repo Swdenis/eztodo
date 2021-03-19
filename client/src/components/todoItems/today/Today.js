@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Container, Grid } from "semantic-ui-react";
-import { getItems, setSelectedDate } from "../../../actions";
+import { getItems } from "../../../actions/toDo";
+import { setSelectedDate } from "../../../actions";
 import { toggleAddItemModel } from "../../../actions/modal";
 import history from "../../../history";
 import ItemList from "./ItemList";
@@ -20,10 +21,10 @@ export default function Today() {
     
     useEffect(()=> {
         if(date) setCurrentDay(new Date(date))
-        dispatch(setSelectedDate(new Date()))
+            dispatch(setSelectedDate(new Date()))
         if(loginData) 
         {const {userId, access_token} = loginData
-        dispatch(getItems(userId, access_token)
+            dispatch(getItems(userId, access_token)
         )}},[dispatch, loginData, date])
 
 
@@ -44,8 +45,10 @@ export default function Today() {
 
     const handleAddItem = () => {
             dispatch(toggleAddItemModel())
-            history.push('/add')
+            history.push('/todo/today/add')
         }
+
+    console.log(currentDay)
 
     return (
 

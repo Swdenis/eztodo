@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Button, Container, Menu } from 'semantic-ui-react'
-import { signOut } from '../../actions'
+import { signOut } from '../../actions/login'
 import { toggleAddItemModel } from '../../actions/modal'
 import history from '../../history'
 

@@ -11,7 +11,7 @@ export default function ColumnOfDailyItems({itemArray,id}) {
 
     const handleAddItem = () => {
         dispatch(toggleAddItemModel())
-        history.push('/add')
+        history.push('/todo/week/add')
     }
 
     const [showAddItem, setShowAddItem] = useState(false)
