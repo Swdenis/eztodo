@@ -19,7 +19,6 @@ export default function AddItemModal() {
     return (
         <Modal
             open={addItemModalOpen}
-            trigger={<Button>Add item</Button>}
             size="tiny"
             onClose={toggleModalClose}
         >
