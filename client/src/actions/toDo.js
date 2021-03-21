@@ -29,7 +29,6 @@ export const addItem = (formValues,accessToken) => async dispatch => {
 } 
 
 export const updateItem = (formValues, accessToken) => async dispatch => {
-    console.log(formValues)
     const response = await items.patch(`/items/${formValues.id}`,formValues,{
       'headers': {
         'Authorization': `Bearer ${accessToken}`}

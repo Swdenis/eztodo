@@ -23,17 +23,17 @@ export default function AddMeetingForm({toggleModal}) {
     const dispatch = useDispatch()
 
     const [initialValues, setInitialValues] = useState(INITIAL_VALUES)
-    const [action, setAction] = useState(addItem)
-    const [initialBody, setInitialBody] = useState(initialValues.body)
-    const [initialLink, setInitialLink] = useState(initialValues.link)
+    const [action, setAction] = useState(()=>addItem)
     
     useEffect(()=>{
       if(item) {
         setInitialValues(item)
-        setAction(updateItem)
-        setInitialBody(initialValues.body)
-        setInitialLink(initialValues.link)
-    }},[initialValues, initialValues.body, initialValues.link, item])
+        setAction(()=>updateItem)
+    }},[])
+
+    useEffect(()=>{
+      console.log(initialValues)
+    })
 
     const validationSchema = Yup.object(
     {
@@ -51,7 +51,7 @@ export default function AddMeetingForm({toggleModal}) {
             onSubmit={
               (values, { setSubmitting }) => {
                 console.log(values)
-                dispatch(updateItem(values,access_token))
+                dispatch(action(values,access_token))
                 toggleModal()
                 setSubmitting(false)
             }
@@ -74,8 +74,8 @@ export default function AddMeetingForm({toggleModal}) {
              as="textarea"
              name="body"
              rows="1"
-             onChange={(e) => setInitialBody(e.target.value)}
-             value={initialBody}
+             onChange={(e) => setInitialValues({...initialValues,[initialValues.body]: e.target.value})}
+             value={initialValues.body}
              onKeyPress={e=>{
                 if (e.key === 'Enter' && e.shiftKey) {
                     return
@@ -89,8 +89,8 @@ export default function AddMeetingForm({toggleModal}) {
              as="textarea"
              rows="1"
              name="link"
-             value={initialLink}
-             onChange={(e) => setInitialLink(e.target.value)}
+             value={initialValues.link}
+             onChange={(e) => setInitialValues({...initialValues,[initialValues.link]: e.target.value})}
            />
            <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit

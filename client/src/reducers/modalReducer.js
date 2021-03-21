@@ -2,7 +2,8 @@
 import { TOGGLE_ADD_ITEM_MODAL, TOGGLE_ADD_MEETING_MODAL } from "../actions/types"
 
 const INITIAL_STATE = {
-    addItemModalOpen: false
+    addItemModalOpen: false,
+    addMeetingModalOpen: false
 }
 
 
