@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, List } from 'semantic-ui-react'
 import DoneDeleteButtons from '../todoItems/common/DoneDeleteButtons'
+import MeetingButtons from './MeetingButtons'
 
 export default function MeetingItem({meeting}) {
     
@@ -20,6 +21,7 @@ export default function MeetingItem({meeting}) {
         setShowEditItems(false)
         setActiveItemId(null)
     }
+    
     return(
         <List.Item
         key={meeting.id}
@@ -34,7 +36,7 @@ export default function MeetingItem({meeting}) {
                 </List.Content>
                 <List.Content style={{justifyContent:"felx-end"}}>
                     {showEditItems && activeItemId === meeting.id ?
-                            <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={meeting} />
+                            <MeetingButtons loginData={loginData} activeItemId={activeItemId} item={meeting} />
                     : null}
                     <a rel="noreferrer" href={meeting.link} target="_blank"><Icon color='blue' name="linkify"/></a>
                 </List.Content>

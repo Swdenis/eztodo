@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 import { deleteItem, setItemDone } from '../../../actions/toDo';
 
-export default function DoneDeleteButtons({item, loginData,activeItemId}) {
+export default function DoneDeleteButtons({item,loginData,activeItemId}) {
 
     const dispatch = useDispatch()
 
@@ -31,6 +31,8 @@ export default function DoneDeleteButtons({item, loginData,activeItemId}) {
         color="green" name='check' onClick={handleDone} />
         <Icon style={{cursor: "pointer"}} 
         color="red" onClick={handleDelete} name='delete'/>
+        <Icon style={{cursor: "pointer"}} 
+        color="grey" name='edit'/>
         </>
         :
         <Icon style={{cursor: "pointer"}} color="blue" 

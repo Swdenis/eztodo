@@ -1,18 +1,22 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
-import { deleteItem, setItemDone } from '../../../actions/toDo';
+import { toggleAddMeetingModal } from '../../actions/modal';
+import { deleteItem, setItemDone, setItemToEdit } from '../../actions/toDo';
+import history from '../../history';
 
-export default function MeetingButtons({item, loginData,activeItemId}) {
+export default function MeetingButtons({item,loginData,activeItemId}) {
 
     const dispatch = useDispatch()
 
-    const handleDone = () => {
-        dispatch(setItemDone({...item, isDone: true}, loginData.access_token))
-    }
-
     const handleReset = () => {
         dispatch(setItemDone({...item, isDone: false}, loginData.access_token))
+    }
+
+    const handleEdit = () => {
+        dispatch(toggleAddMeetingModal())
+        dispatch(setItemToEdit(item))
+        history.push('/meetings/add')
     }
 
     const handleDelete= () => {
@@ -28,7 +32,7 @@ export default function MeetingButtons({item, loginData,activeItemId}) {
         ?
         <>
         <Icon style={{cursor: "pointer"}} 
-        color="green" name='check' onClick={handleDone} />
+        color="grey" name='edit' onClick={handleEdit}/>
         <Icon style={{cursor: "pointer"}} 
         color="red" onClick={handleDelete} name='delete'/>
         </>

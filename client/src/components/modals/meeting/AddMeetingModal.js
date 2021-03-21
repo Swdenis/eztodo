@@ -5,7 +5,7 @@ import { toggleAddMeetingModal } from '../../../actions/modal'
 import history from '../../../history'
 import AddMeetingForm from './AddMeetingForm'
 
-export default function AddMeetingModal() {
+export default function AddMeetingModal({modalTitle}) {
 
     const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ export default function AddMeetingModal() {
             size="tiny"
             onClose={toggleModalClose}
         >
-            <Modal.Header>Add a new meeting</Modal.Header>
+            <Modal.Header>{modalTitle}</Modal.Header>
             <Modal.Content>
                 <AddMeetingForm toggleModal={toggleModalClose}/>
             </Modal.Content>
