@@ -31,6 +31,7 @@ export default function AddMeetingForm({toggleModal}) {
               link:'' }}
             onSubmit={(values, { setSubmitting }) => {
                 dispatch(addItem(values,access_token))
+                toggleModal()
                 setSubmitting(false)
             }
         }
@@ -69,9 +70,8 @@ export default function AddMeetingForm({toggleModal}) {
              name="link"
              placeholder='Insert the link to meeting'
            />
-           {errors.email && touched.email && errors.email}
-           {errors.password && touched.password && errors.password}
-           <Button style={{marginTop:"10px"}} positive type="submit" onClick={toggleModal} disabled={isSubmitting}>
+           {errors.link && touched.link && errors.body}
+           <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit
            </Button>
            <Button style={{marginTop:"10px"}} onClick={toggleModal} disabled={isSubmitting}>

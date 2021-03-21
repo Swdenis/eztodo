@@ -233,7 +233,7 @@
       "userId": "1",
       "isDone": false,
       "id": "TkP4fcJ",
-      "link": "https://us04web.zoom.us/j/2236337938?pwd=am9qVy9vZ2pncGY1LzBqWWh2ZHBSQT09"
+      "link": "http://test.com"
     },
     {
       "body": "super test",
@@ -241,7 +241,31 @@
       "userId": "1",
       "isDone": false,
       "id": "F8WzsR1",
-      "link": "https://us04web.zoom.us/j/2236337938?pwd=am9qVy9vZ2pncGY1LzBqWWh2ZHBSQT09"
+      "link": "http://test.com"
+    },
+    {
+      "body": "Important class",
+      "date": "2021-03-21",
+      "userId": "1",
+      "isDone": false,
+      "link": "test.com",
+      "id": "FSEnAKC"
+    },
+    {
+      "body": "test",
+      "date": "2021-03-21",
+      "userId": "1",
+      "isDone": false,
+      "link": "test",
+      "id": "EoWI30Q"
+    },
+    {
+      "body": "test",
+      "date": "2021-03-21",
+      "userId": "1",
+      "isDone": false,
+      "link": "test",
+      "id": "VnY-HXW"
     }
   ]
 }

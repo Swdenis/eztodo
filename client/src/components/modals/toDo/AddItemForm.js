@@ -30,6 +30,7 @@ export default function AddItemForm({toggleModal}) {
               link:'' }}
             onSubmit={(values, { setSubmitting }) => {
                 dispatch(addItem(values,access_token))
+                toggleModal()
                 setSubmitting(false)
             }
         }
@@ -60,9 +61,8 @@ export default function AddItemForm({toggleModal}) {
                     isValid && handleSubmit()
                 }}}
            />
-           {errors.email && touched.email && errors.email}
-           {errors.password && touched.password && errors.password}
-           <Button style={{marginTop:"10px"}} positive type="submit" onClick={toggleModal} disabled={isSubmitting}>
+           {errors.body && touched.date && errors.date}
+           <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit
            </Button>
            <Button style={{marginTop:"10px"}} onClick={toggleModal} disabled={isSubmitting}>
