@@ -7,13 +7,14 @@ import PrivateRoute from './navigation/PrivateRoute'
 import Login from './Login'
 import { ToastContainer } from 'react-toastify'
 import '../App.css'
-import AddItemModal from './modals/AddItemModal'
+import AddItemModal from './modals/toDo/AddItemModal'
 import Meetings from './meetings/Meetings'
 import ToDoNavBar from './navigation/ToDoNavBar'
 import Deadlines from './deadlines/Deadlines'
 import Month from './todoItems/month/Month'
 import Today from './todoItems/today/Today'
 import Week from './todoItems/week/Week'
+import AddMeetingModal from './modals/meeting/AddMeetingModal'
 
 export default function App() {
     return(
@@ -29,6 +30,7 @@ export default function App() {
                 <PrivateRoute path='/todo/week' component={Week}/>
                 <PrivateRoute path='/todo/today/' component={Today}/>
                 <PrivateRoute path='/meetings/' component={Meetings}/>
+                <PrivateRoute path={'/meetings/add'} component={AddMeetingModal}/>
                 <PrivateRoute path='/deadlines/' component={Deadlines}/>
             </Container>
         </Router>

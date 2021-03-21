@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid } from "semantic-ui-react";
 import { getItems } from "../../../actions/toDo";
 import { setSelectedDate } from "../../../actions";
-import { toggleAddItemModel } from "../../../actions/modal";
+import { toggleAddItemModal } from "../../../actions/modal";
 import history from "../../../history";
 import ItemList from "./ItemList";
 import TodayHeader from "./TodayHeader";
@@ -41,7 +41,7 @@ export default function Today() {
         }
 
     const handleAddItem = () => {
-            dispatch(toggleAddItemModel())
+            dispatch(toggleAddItemModal())
             history.push('/todo/today/add')
         }
 

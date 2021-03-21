@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { List } from 'semantic-ui-react';
-import { toggleAddItemModel } from '../../../actions/modal';
+import { toggleAddItemModal } from '../../../actions/modal';
 import history from '../../../history';
 import DailyItem from './DailyItem';
 
@@ -10,7 +10,7 @@ export default function ColumnOfDailyItems({itemArray,id}) {
     const dispatch = useDispatch()
 
     const handleAddItem = () => {
-        dispatch(toggleAddItemModel())
+        dispatch(toggleAddItemModal())
         history.push('/todo/week/add')
     }
 

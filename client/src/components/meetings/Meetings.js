@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Grid } from 'semantic-ui-react'
-import { toggleAddItemModel } from '../../actions/modal'
+import { Container, Grid, Header } from 'semantic-ui-react'
+import { toggleAddMeetingModal } from '../../actions/modal'
 import { getItems } from '../../actions/toDo'
 import history from '../../history'
 import MeetingsList from './MeetingsList'
@@ -22,14 +22,17 @@ export default function Meetings() {
         )}},[dispatch, loginData])
     
         const handleAddItem = () => {
-            dispatch(toggleAddItemModel())
-            history.push('/todo/today/add')
+            dispatch(toggleAddMeetingModal())
+            history.push('/meetings/add')
         }
 
 
     return(
         <Grid columns={2}>
-                    <Grid.Column style={{marginTop:'10%'}}>
+                    <Grid.Row style={{marginTop:'10%'}}>
+                        <Header as="h1" content="My meetings" />
+                    </Grid.Row>
+                    <Grid.Column>
                     <MeetingsList 
                     meetings={meetings}/>
                     <i style={{cursor: "pointer"}} 

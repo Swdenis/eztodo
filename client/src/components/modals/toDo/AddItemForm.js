@@ -1,12 +1,12 @@
 import React from 'react'
 import { Formik,Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../actions/toDo';
+import { addItem } from '../../../actions/toDo';
 import * as Yup from 'yup' 
 import { Button, Header } from 'semantic-ui-react';
 import * as dateFns from "date-fns";
 
-export default function AddItem({toggleModal}) {
+export default function AddItemForm({toggleModal}) {
 
     const {loginData: {userId, access_token}} = useSelector(state => state.auth)
     

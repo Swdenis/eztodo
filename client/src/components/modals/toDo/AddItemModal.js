@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
-import { toggleAddItemModel } from '../../actions/modal'
-import history from '../../history'
+import { toggleAddItemModal } from '../../../actions/modal'
+import history from '../../../history'
 import AddItem from './AddItemForm'
 
 export default function AddItemModal() {
@@ -12,7 +12,7 @@ export default function AddItemModal() {
     const {addItemModalOpen} = useSelector(state => state.modal)
 
     const toggleModalClose = () => {
-        dispatch(toggleAddItemModel())
+        dispatch(toggleAddItemModal())
         history.goBack()
     }
 
