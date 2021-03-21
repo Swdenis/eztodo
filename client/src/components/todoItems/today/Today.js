@@ -1,7 +1,6 @@
 import * as dateFns from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
 import { Container, Grid } from "semantic-ui-react";
 import { getItems } from "../../../actions/toDo";
 import { setSelectedDate } from "../../../actions";
@@ -59,7 +58,7 @@ export default function Today() {
         <Grid.Row>
                 <Grid.Column>
                 {renderDay(items)}
-                <i style={{cursor: "pointer"}} onClick={handleAddItem} 
+                <i style={{cursor: "pointer",marginTop:"7px"}} onClick={handleAddItem} 
                 className="big green plus circle icon" />
                 </Grid.Column>
                 <Grid.Column/>
