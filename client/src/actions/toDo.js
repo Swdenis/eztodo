@@ -47,7 +47,6 @@ export const deleteItem = (itemId, accessToken) => async (dispatch) => {
 
 export const getItem = id => async dispatch => {
     const response = await items.get(`/items'/${id}`)
-    console.log(response)
     dispatch({type: GET_ITEM, payload: response.data})
     history.push('/todo/today')
 }

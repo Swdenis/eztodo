@@ -35,8 +35,7 @@ export default function AddItemForm({toggleModal}) {
     const validationSchema = Yup.object(
     {
         date: Yup.date().required(),
-        body: Yup.string().required(),
-        link: Yup.string().required(),
+        body: Yup.string().required()
     })
 
     return(
@@ -48,8 +47,8 @@ export default function AddItemForm({toggleModal}) {
                 dispatch(action(values,access_token))
                 toggleModal()
                 setSubmitting(false)
-            }
-        }
+            }}
+            enableReinitialize={true}
         >
        {({
          errors,

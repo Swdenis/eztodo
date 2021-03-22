@@ -7,8 +7,6 @@ export default function Item({loginData,item}) {
     const handelShowEditItems = (e) => {
         setActiveItemId(e.target.id)
         setShowEditItems(true)
-        console.log(showEditItems)
-        console.log(activeItemId)
     }
 
     const [showEditItems, setShowEditItems] = useState(false)
