@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { List } from 'semantic-ui-react';
-import DoneDeleteButtons from '../common/DoneDeleteButtons';
+import DoneDeleteEditButtons from '../common/DoneDeleteEditButtons';
 
 export default function DailyItem({item}) {
 
@@ -37,7 +37,7 @@ export default function DailyItem({item}) {
                 </List.Content>
                 <List.Content>
                 {showEditItems && activeItemId === item.id ?
-                    <DoneDeleteButtons loginData={loginData} activeItemId={activeItemId} item={item} />
+                    <DoneDeleteEditButtons loginData={loginData} activeItemId={activeItemId} item={item} />
                 : null}
                 </List.Content>
             </List.Content>

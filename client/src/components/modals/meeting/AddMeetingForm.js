@@ -45,7 +45,7 @@ export default function AddMeetingForm({toggleModal}) {
             initialValues={initialValues}
             enableReinitialize={true}
             onSubmit={
-              (values, { setSubmitting }) => {
+              ( values, { setSubmitting }) => {
                 dispatch(action(values,access_token))
                 toggleModal()
                 setSubmitting(false)

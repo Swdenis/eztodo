@@ -1,9 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
-import { deleteItem, setItemDone } from '../../../actions/toDo';
+import { toggleAddItemModal } from '../../../actions/modal';
+import { deleteItem, setItemDone, setItemToEdit } from '../../../actions/toDo';
+import history from '../../../history';
 
-export default function DoneDeleteButtons({item,loginData,activeItemId}) {
+export default function DoneDeleteEditButtons({item,loginData,activeItemId}) {
 
     const dispatch = useDispatch()
 
@@ -23,6 +25,12 @@ export default function DoneDeleteButtons({item,loginData,activeItemId}) {
         }
     }
 
+    const handleEdit = () => {
+        dispatch(toggleAddItemModal())
+        dispatch(setItemToEdit(item))
+        history.push('/todo/today/add')
+    }
+
         return(
         !item.isDone 
         ?
@@ -30,9 +38,9 @@ export default function DoneDeleteButtons({item,loginData,activeItemId}) {
         <Icon style={{cursor: "pointer"}} 
         color="green" name='check' onClick={handleDone} />
         <Icon style={{cursor: "pointer"}} 
-        color="red" onClick={handleDelete} name='delete'/>
+        color="grey" name='edit' onClick={handleEdit}/>
         <Icon style={{cursor: "pointer"}} 
-        color="grey" name='edit'/>
+        color="red" onClick={handleDelete} name='delete'/>
         </>
         :
         <Icon style={{cursor: "pointer"}} color="blue" 

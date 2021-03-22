@@ -47,7 +47,7 @@ export default function Today() {
 
     return (
 
-    <Grid columns={3}>
+    <Grid columns={2}>
         <Grid.Row>
         <Grid.Column width={16}>
         <div className='calendar'>
@@ -61,7 +61,6 @@ export default function Today() {
                 <i style={{cursor: "pointer",marginTop:"7px"}} onClick={handleAddItem} 
                 className="big green plus circle icon" />
                 </Grid.Column>
-                <Grid.Column/>
                 <Grid.Column/>
         </Grid.Row>
     </Grid>

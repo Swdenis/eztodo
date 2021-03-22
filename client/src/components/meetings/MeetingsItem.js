@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, List } from 'semantic-ui-react'
-import DoneDeleteButtons from '../todoItems/common/DoneDeleteButtons'
+import DoneDeleteEditButtons from '../todoItems/common/DoneDeleteEditButtons'
 import MeetingButtons from './MeetingButtons'
 
 export default function MeetingItem({meeting}) {

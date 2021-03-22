@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
 import { toggleAddItemModal } from '../../../actions/modal'
+import { setItemToEdit } from '../../../actions/toDo'
 import history from '../../../history'
 import AddItem from './AddItemForm'
 
@@ -13,6 +14,7 @@ export default function AddItemModal() {
 
     const toggleModalClose = () => {
         dispatch(toggleAddItemModal())
+        dispatch(setItemToEdit(''))
         history.goBack()
     }
 
