@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { List, Segment } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import DoneDeleteEditButtons from '../common/DoneDeleteEditButtons'
 
 export default function Item({loginData,item}) {
@@ -25,6 +25,7 @@ export default function Item({loginData,item}) {
         onMouseEnter={e => handelShowEditItems(e)}
         onMouseLeave={handleMouseLeave}
         className={item.isDone ? 'isDone': ''}
+        style={{fontSize:"115%"}}
         >
             <Segment.Inline 
             style={{display:"flex", justifyContent:"space-between"}}

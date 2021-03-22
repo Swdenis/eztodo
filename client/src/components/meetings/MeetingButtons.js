@@ -31,13 +31,13 @@ export default function MeetingButtons({item,loginData,activeItemId}) {
         !item.isDone 
         ?
         <>
-        <Icon style={{cursor: "pointer"}} 
+        <Icon style={{cursor: "pointer"}}  size="large"
         color="grey" name='edit' onClick={handleEdit}/>
-        <Icon style={{cursor: "pointer"}} 
+        <Icon style={{cursor: "pointer"}}  size="large"
         color="red" onClick={handleDelete} name='delete'/>
         </>
         :
-        <Icon style={{cursor: "pointer"}} color="blue" 
+        <Icon style={{cursor: "pointer"}} color="blue"  size="large"
         onClick={handleReset} name='repeat' className="reset"/>
         )
 }

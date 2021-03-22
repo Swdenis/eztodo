@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Icon, List } from 'semantic-ui-react'
+import { Icon, List, Segment } from 'semantic-ui-react'
 import DoneDeleteEditButtons from '../todoItems/common/DoneDeleteEditButtons'
 import MeetingButtons from './MeetingButtons'
 
@@ -23,24 +23,27 @@ export default function MeetingItem({meeting}) {
     }
     
     return(
-        <List.Item
+        <Segment
         key={meeting.id}
         id={meeting.id} 
         onMouseEnter={e => handelShowEditItems(e)}
         onMouseLeave={handleMouseLeave}
         className={meeting.isDone ? 'isDone': ''}
+        style={{fontSize:"115%"}}
         >
-            <List.Content style={{display:"flex", justifyContent:"space-between"}}>
-                <List.Content style={{flexBasis:"70%"}}>
+            <Segment.Inline style={{display:"flex", justifyContent:"space-between"}}>
+                <Segment.Inline style={{flexBasis:"70%"}}>
                     {meeting.body}
-                </List.Content>
-                <List.Content style={{justifyContent:"felx-end"}}>
+                </Segment.Inline>
+                <Segment.Inline style={{justifyContent:"felx-end"}}>
                     {showEditItems && activeItemId === meeting.id ?
                             <MeetingButtons loginData={loginData} activeItemId={activeItemId} item={meeting} />
                     : null}
-                    <a rel="noreferrer" href={meeting.link} target="_blank"><Icon color='blue' name="linkify"/></a>
-                </List.Content>
-            </List.Content>
-        </List.Item>
+                    <a rel="noreferrer" href={meeting.link} target="_blank">
+                        <Icon color='blue' name="linkify"  size="large"/>
+                    </a>
+                </Segment.Inline>
+            </Segment.Inline>
+        </Segment>
     )
 }

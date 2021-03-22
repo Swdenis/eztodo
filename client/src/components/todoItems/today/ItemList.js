@@ -5,7 +5,7 @@ import Item from './Item'
 export default function ItemList({loginData,items}) {
 
     return(
-        <Segment.Group divided verticalAlign='middle' style={{fontSize:"20px"}}>
+        <Segment.Group>
             {
             items.map(item => 
                 <Item loginData={loginData} item={item}/>
