@@ -29,11 +29,7 @@ export default function AddMeetingForm({toggleModal}) {
       if(item) {
         setInitialValues(item)
         setAction(()=>updateItem)
-    }},[])
-
-    useEffect(()=>{
-      console.log(initialValues)
-    })
+    }},[item])
 
     const validationSchema = Yup.object(
     {
@@ -50,7 +46,6 @@ export default function AddMeetingForm({toggleModal}) {
             enableReinitialize={true}
             onSubmit={
               (values, { setSubmitting }) => {
-                console.log(values)
                 dispatch(action(values,access_token))
                 toggleModal()
                 setSubmitting(false)
@@ -74,7 +69,7 @@ export default function AddMeetingForm({toggleModal}) {
              as="textarea"
              name="body"
              rows="1"
-             onChange={(e) => setInitialValues({...initialValues,[initialValues.body]: e.target.value})}
+             onChange={(e) => setInitialValues({...initialValues,body: e.target.value})}
              value={initialValues.body}
              onKeyPress={e=>{
                 if (e.key === 'Enter' && e.shiftKey) {
@@ -90,7 +85,7 @@ export default function AddMeetingForm({toggleModal}) {
              rows="1"
              name="link"
              value={initialValues.link}
-             onChange={(e) => setInitialValues({...initialValues,[initialValues.link]: e.target.value})}
+             onChange={(e) => setInitialValues({...initialValues,link: e.target.value})}
            />
            <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit
