@@ -5,7 +5,7 @@ import { toggleAddItemModal } from '../../../actions/modal';
 import { deleteItem, setItemDone, setItemToEdit } from '../../../actions/toDo';
 import history from '../../../history';
 
-export default function DoneDeleteEditButtons({item,loginData,activeItemId}) {
+export default function DoneDeleteEditButtons({item,loginData,activeItemId,size}) {
 
     const dispatch = useDispatch()
 
@@ -35,15 +35,15 @@ export default function DoneDeleteEditButtons({item,loginData,activeItemId}) {
         !item.isDone 
         ?
         <>
-        <Icon style={{cursor: "pointer"}} size="large"
-        color="green" name='check' onClick={handleDone} />
-        <Icon style={{cursor: "pointer"}} size="large"
-        color="grey" name='edit' onClick={handleEdit}/>
-        <Icon style={{cursor: "pointer"}} size="large"
-        color="red" onClick={handleDelete} name='delete'/>
+            <Icon style={{cursor: "pointer"}} size={size}
+            color="green" name='check' onClick={handleDone} />
+            <Icon style={{cursor: "pointer"}} size={size}
+            color="grey" name='edit' onClick={handleEdit}/>
+            <Icon style={{cursor: "pointer"}} size={size}
+            color="red" onClick={handleDelete} name='delete'/>
         </>
-        :
-        <Icon style={{cursor: "pointer"}} color="blue" size="large"
-        onClick={handleReset} name='repeat' className="reset"/>
+            :
+            <Icon style={{cursor: "pointer"}} color="blue" size={size}
+            onClick={handleReset} name='repeat' className="reset"/>
         )
 }

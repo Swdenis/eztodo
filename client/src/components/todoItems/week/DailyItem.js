@@ -32,12 +32,12 @@ export default function DailyItem({item}) {
         >
             <List.Content
             style={{display:"flex", justifyContent:"space-between",color:'black'}}>
-                <List.Content style={{flexBasis:"70%",overflow:"hidden",overflowWrap: "break-word"}}>
+                <List.Content style={{flexBasis:"60%",overflow:"hidden",overflowWrap: "break-word"}}>
                 {item.body}
                 </List.Content>
                 <List.Content>
                 {showEditItems && activeItemId === item.id ?
-                    <DoneDeleteEditButtons loginData={loginData} activeItemId={activeItemId} item={item} />
+                    <DoneDeleteEditButtons size="small" loginData={loginData} activeItemId={activeItemId} item={item} />
                 : null}
                 </List.Content>
             </List.Content>

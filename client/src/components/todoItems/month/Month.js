@@ -6,6 +6,8 @@ import { setSelectedDate } from "../../../actions";
 import DayCard from "./DayCard";
 import { Popup } from "semantic-ui-react";
 import ThingsToDo from "../common/ThingsToDo";
+import MonthHeader from "./MonthHeader";
+import WeekDayNames from "./WeekDayNames";
 
 export default function Month() {
     const dispatch = useDispatch()
@@ -28,33 +30,6 @@ export default function Month() {
         dispatch(setSelectedDate(day))
     }
 
-    const nextMonth = () => {
-        setCurrentMonth(dateFns.addMonths(currentMonth, 1))
-    }
-
-    const prevMonth = () => {
-        setCurrentMonth(dateFns.subMonths(currentMonth, 1))
-    }
-
-    const renderHeader = () => {
-        const dateFormat = "MMMM yyyy";
-        return (
-            <div className="header row flex-middle">
-            <div className="col col-start">
-                <div className="icon" onClick={prevMonth}>
-                chevron_left
-                </div>
-            </div>
-            <div className="col col-center">
-                <span>
-                {dateFns.format(currentMonth, dateFormat)}
-                </span>
-            </div>
-            <div className="col col-end" onClick={nextMonth}>
-                <div className="icon">chevron_right</div>
-            </div>
-            </div>)
-    }
 
     const renderDays = () => {
         const dateFormat = "iiii";
@@ -122,8 +97,8 @@ export default function Month() {
 
     return (
       <div className='calendar'>
-        {renderHeader()}
-        {renderDays()}
+        <MonthHeader setCurrentMonth={setCurrentMonth} currentMonth={currentMonth}/> 
+        <WeekDayNames currentMonth={currentMonth}/>
         {renderCells()}
       </div>
     )

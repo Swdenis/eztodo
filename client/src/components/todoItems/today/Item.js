@@ -35,7 +35,7 @@ export default function Item({loginData,item}) {
                 </Segment.Inline>
                 {showEditItems && activeItemId === item.id ?
                     <Segment.Inline>
-                        <DoneDeleteEditButtons loginData={loginData} activeItemId={activeItemId} item={item} />
+                        <DoneDeleteEditButtons size="large" loginData={loginData} activeItemId={activeItemId} item={item} />
                     </Segment.Inline> 
                 : null}
             </Segment.Inline>
