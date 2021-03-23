@@ -29,7 +29,7 @@ export default function Meetings() {
 
     return(
         <Grid columns={2}>
-                    <Grid.Row style={{marginTop:'10%'}}>
+                    <Grid.Row style={{marginTop:'5%'}}>
                         <Header as="h1" content="My meetings" />
                     </Grid.Row>
                     <Grid.Column>

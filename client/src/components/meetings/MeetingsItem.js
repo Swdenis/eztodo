@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Icon, List, Segment } from 'semantic-ui-react'
+import { Icon, Segment } from 'semantic-ui-react'
 import MeetingButtons from './MeetingButtons'
 
 export default function MeetingItem({meeting}) {
