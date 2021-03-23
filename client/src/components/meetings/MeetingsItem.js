@@ -34,7 +34,7 @@ export default function MeetingItem({meeting}) {
                 <Segment.Inline style={{flexBasis:"70%"}}>
                     {meeting.body}
                 </Segment.Inline>
-                <Segment.Inline style={{justifyContent:"felx-end"}}>
+                <Segment.Inline style={{justifyContent:"flex-end"}}>
                     {showEditItems && activeItemId === meeting.id ?
                             <MeetingButtons loginData={loginData} activeItemId={activeItemId} item={meeting} />
                     : null}

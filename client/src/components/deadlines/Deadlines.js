@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Grid, Header } from 'semantic-ui-react'
+import { Grid, Header } from 'semantic-ui-react'
 import { toggleAddDeadlineModal } from '../../actions/modal'
 import { getItems } from '../../actions/toDo'
 import history from '../../history'
@@ -38,6 +38,5 @@ export default function Deadlines() {
                     <i style={{cursor: "pointer"}} 
                     className="big green plus circle icon" onClick={handleAddItem}/>
                     </Grid.Column>
-                    <Grid.Column/>
         </Grid>)
 }

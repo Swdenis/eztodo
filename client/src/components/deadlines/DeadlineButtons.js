@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
-import { toggleAddMeetingModal } from '../../actions/modal';
+import { toggleAddDeadlineModal } from '../../actions/modal';
 import { deleteItem, setItemDone, setItemToEdit } from '../../actions/toDo';
 import history from '../../history';
 
@@ -18,9 +18,9 @@ export default function DeadlineButtons({item,loginData,activeItemId}) {
     }
 
     const handleEdit = () => {
-        dispatch(toggleAddMeetingModal())
+        dispatch(toggleAddDeadlineModal())
         dispatch(setItemToEdit(item))
-        history.push('/dealines/add')
+        history.push('/deadlines/add')
     }
 
     const handleDelete= () => {
