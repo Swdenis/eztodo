@@ -22,7 +22,7 @@ export default function DeadlineItem({deadline}) {
         <Popup
             style={{boxShadow:"none"}}
             basic
-            offset={[700, -58]}
+            offset={[700, -59]}
             hoverable
             trigger={
                         <Segment
