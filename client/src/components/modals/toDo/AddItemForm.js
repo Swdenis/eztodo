@@ -17,7 +17,9 @@ export default function AddItemForm({toggleModal}) {
       date: dateFns.format(selectedDate,'yyyy-MM-dd'),
       userId: userId, 
       isDone: false,
-      link:''
+      link:'',
+      isDeadline:'',
+      time:''
       }
 
 

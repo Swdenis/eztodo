@@ -21,6 +21,7 @@ export default function CalendarCells({currentMonth,selectedMonthDate,items,onDa
                 dateFns.isSameDay(new Date(item.date), cloneDay))
             days.push(
             <CellPopup 
+            key={day}
             cloneDay={cloneDay} day={cloneDay} thingsToDo={thingsToDo} formattedDate={formattedDate}
             monthStart={monthStart} onDateClick={onDateClick} selectedMonthDate={selectedMonthDate}
             />

@@ -8,7 +8,7 @@ export default function ItemList({loginData,items}) {
         <Segment.Group>
             {
             items.map(item => 
-                <Item loginData={loginData} item={item}/>
+                <Item key={item.id} loginData={loginData} item={item}/>
                 )
             }
         </Segment.Group>

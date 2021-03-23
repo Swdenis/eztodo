@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Grid, Header } from 'semantic-ui-react'
+import { Grid, Header } from 'semantic-ui-react'
 import { toggleAddMeetingModal } from '../../actions/modal'
 import { getItems } from '../../actions/toDo'
 import history from '../../history'

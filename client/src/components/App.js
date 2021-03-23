@@ -15,6 +15,7 @@ import Month from './todoItems/month/Month'
 import Today from './todoItems/today/Today'
 import Week from './todoItems/week/Week'
 import AddMeetingModal from './modals/meeting/AddMeetingModal'
+import AddDeadlineModal from './modals/deadline/AddDeadlineModal'
 
 export default function App() {
     return(
@@ -32,6 +33,7 @@ export default function App() {
                 <PrivateRoute path='/meetings/' component={Meetings}/>
                 <PrivateRoute path={'/meetings/add'} component={AddMeetingModal}/>
                 <PrivateRoute path='/deadlines/' component={Deadlines}/>
+                <PrivateRoute path={'/deadlines/add'} component={AddDeadlineModal}/>
             </Container>
         </Router>
         </>

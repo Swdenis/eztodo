@@ -3,24 +3,26 @@ import { Formik,Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem,updateItem } from '../../../actions/toDo';
 import * as Yup from 'yup' 
-import { Button } from 'semantic-ui-react';
+import { Button, Header, Label } from 'semantic-ui-react';
 import * as dateFns from "date-fns";
-import { setSelectedDate } from '../../../actions';
+import { toast } from 'react-toastify';
+import MyTimeInput from '../../common/MyTimeInput';
+import MyTextArea from '../../common/MyTextArea';
 
-export default function AddMeetingForm({toggleModal}) {
+export default function AddDeadlineForm({toggleModal}) {
     const {loginData: {userId, access_token}} = useSelector(state => state.auth)
     const {item} = useSelector(state => state.itemToEdit)
     const {selectedDate} = useSelector(state => state.selectedDate)
 
     const INITIAL_VALUES = {
-      body: '',
-      date: dateFns.format(selectedDate,'yyyy-MM-dd'),
-      userId: userId, 
-      isDone: false,
-      link:'',
-      isDeadline:'',
-      time:''
-      }
+        body: '',
+        date: dateFns.format(selectedDate,'yyyy-MM-dd'),
+        userId: userId, 
+        isDone: false,
+        link:'',
+        isDeadline:true,
+        time:dateFns.format(selectedDate,'kk:mm')
+        }
 
     const dispatch = useDispatch()
 
@@ -36,8 +38,7 @@ export default function AddMeetingForm({toggleModal}) {
     const validationSchema = Yup.object(
     {
         date: Yup.date().required(),
-        body: Yup.string().required(),
-        link: Yup.string().required(),
+        body: Yup.string().required()
     })
 
 
@@ -65,14 +66,15 @@ export default function AddMeetingForm({toggleModal}) {
              name="date"
              placeholder={initialValues.date}
            />
-           <Field 
-             style={{marginTop:"10px"}}
+           <MyTimeInput 
+             placeholder={initialValues.time} name="time"/>
+           <MyTextArea 
              as="textarea"
              name="body"
              rows="1"
+             placeholder="Enter the text (Enter to submit, SHIFT + Enter to start a new line)"
              onChange={(e) => setInitialValues({...initialValues,body: e.target.value})}
              value={initialValues.body}
-             placeholder="Conference title"
              onKeyPress={e=>{
                 if (e.key === 'Enter' && e.shiftKey) {
                     return
@@ -80,15 +82,6 @@ export default function AddMeetingForm({toggleModal}) {
                     e.preventDefault()
                     isValid && handleSubmit()
                 }}}   
-           />
-           <Field
-             style={{marginTop:"10px"}}
-             as="textarea"
-             rows="1"
-             name="link"
-             placeholder="Link"
-             value={initialValues.link}
-             onChange={(e) => setInitialValues({...initialValues,link: e.target.value})}
            />
            <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit
