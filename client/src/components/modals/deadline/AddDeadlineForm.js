@@ -66,7 +66,9 @@ export default function AddDeadlineForm({toggleModal}) {
              placeholder={initialValues.date}
            />
            <MyTimeInput 
-             placeholder={initialValues.time} name="time"/>
+             placeholder={initialValues.time}
+             onChange={(e) => setInitialValues({...initialValues,time: e.target.value})}
+             name="time"/>
            <MyTextArea 
              name="body"
              rows="1"
