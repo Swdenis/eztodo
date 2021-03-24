@@ -30,7 +30,7 @@ export default function DayCard({day,items}) {
                 {
                 items.length > 0 ?
                 items.map(item => 
-                    <DailyItem item={item} />)
+                    <DailyItem key={item.id} item={item} />)
                 : <Container>No tasks for this day yet</Container>
                 }
             </List>

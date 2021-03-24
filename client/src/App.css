@@ -170,10 +170,20 @@ main {
 .calendar .body .cell .countThingsToDo {
   position: absolute;
   top: 2.3em;
-  right: 3.8em;
+  left: 4em;
   font-size: 82.5%;
   line-height: 1;
   font-weight: 700;
+}
+
+.calendar .body .cell .countDeadlines {
+  position: absolute;
+  top: 3.7em;
+  left: 4em;
+  color: red;
+  font-size: 82.5%;
+  line-height: 1;
+  font-weight: 400;
 }
 
 .calendar .body .cell:hover {
@@ -246,6 +256,10 @@ main {
 #itemsRow {
   font-size: 14px; 
   margin-top: 15px;
+}
+
+.deadline {
+  border-left: 5px solid red;  
 }
 
 /*home page styles*/
