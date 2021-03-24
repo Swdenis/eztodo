@@ -67,7 +67,6 @@ export default function AddMeetingForm({toggleModal}) {
            />
            <MyTextArea 
              style={{marginTop:'10px'}}
-             as="textarea"
              name="body"
              rows="1"
              placeholder="Conference title"
@@ -82,7 +81,6 @@ export default function AddMeetingForm({toggleModal}) {
                 }}}   
            />
            <MyTextArea 
-             as="textarea"
              name="body"
              rows="2"
              placeholder="Link"

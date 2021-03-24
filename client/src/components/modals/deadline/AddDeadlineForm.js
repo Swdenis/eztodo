@@ -68,7 +68,6 @@ export default function AddDeadlineForm({toggleModal}) {
            <MyTimeInput 
              placeholder={initialValues.time} name="time"/>
            <MyTextArea 
-             as="textarea"
              name="body"
              rows="1"
              placeholder="Enter the text (Enter to submit, SHIFT + Enter to start a new line)"

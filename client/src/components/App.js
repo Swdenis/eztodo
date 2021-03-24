@@ -16,6 +16,7 @@ import Today from './todoItems/today/Today'
 import Week from './todoItems/week/Week'
 import AddMeetingModal from './modals/meeting/AddMeetingModal'
 import AddDeadlineModal from './modals/deadline/AddDeadlineModal'
+import RegisterModal from './modals/register/RegisterModal'
 
 export default function App() {
     return(
@@ -25,6 +26,7 @@ export default function App() {
             <Container>
                 <Route path='/' exact component={Login}/>
                 <PrivateRoute path='/' component={NavBar}/>
+                <Route path='/register' component={RegisterModal}/>
                 <PrivateRoute path='/todo' component={ToDoNavBar}/>
                 <PrivateRoute path={'/todo/(.+)/add'} component={AddItemModal}/>
                 <PrivateRoute path='/todo/month' component={Month}/>

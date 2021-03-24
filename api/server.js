@@ -14,6 +14,43 @@ server.use(middlewares);
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
 
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+const dataPath = './users.json'
+const readFile = (
+  callback,
+  returnJson = false,
+  filePath = dataPath,
+  encoding = 'utf8'
+) => {
+  fs.readFile(filePath, encoding, (err, data) => {
+    if (err) {
+      throw err;
+    }
+
+    callback(returnJson ? JSON.parse(data) : data);
+  });
+};
+
+const writeFile = (
+  fileData,
+  callback,
+  filePath= dataPath,
+  encoding = 'utf8'
+) => {
+  fs.writeFile(filePath, fileData, encoding, err => {
+    if (err) {
+      throw err;
+    }
+
+    callback();
+  });
+};
+
 
 const SECRET_KEY = 'SUPERSECRETKEY'
 const expiresIn = '1h'
@@ -50,6 +87,7 @@ server.post('/auth/login', (req, res) => {
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
+    if(req.baseUrl === '/signup') next()
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       const status = 401
       const message = 'Error in authorization format'
@@ -75,7 +113,6 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
 })
 
 server.get('/items/userId', (req, res) => {
-
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
         const status = 401
         const message = 'Error in authorization format'
@@ -102,6 +139,28 @@ server.get('/items/userId', (req, res) => {
         res.status(status).json({status, message})
       }
 })
+
+server.post('/signup', (req, res) => {
+  const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
+  const {email,password} = req.body
+  console.log(userdb.users)
+  const emailUsed = userdb.users.findIndex(user=> user.email === email)
+  if (emailUsed !== -1) {
+    const success = false
+    const status = 401
+    const message = 'This email has already been used'
+    res.status(status).json({success,status, message})
+    return
+  }
+  readFile(users => {
+    const id = uuidv4()
+    users[id] = req.body;
+    console.log(users)
+    writeFile(JSON.stringify(data, null, 2), () => {
+      res.status(200).send('sign up successfull');
+    });
+  }, true);
+  })
 
 server.listen(port);
 server.use(router);

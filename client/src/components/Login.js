@@ -3,11 +3,20 @@ import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn, tryLogIn } from '../actions/login';
 import * as Yup from 'yup' 
-import { Button, Container, Header, Segment } from 'semantic-ui-react';
+import { Button, Container, Header } from 'semantic-ui-react';
 import history from '../history'
 import MyTextInput from './MyTextInput';
+import { toggleRegisterModal } from '../actions/modal';
 
 export default function Login() {
+
+
+  const dispatch = useDispatch()
+
+    const handleSignUp = () => {
+      dispatch(toggleRegisterModal())
+      history.push('/register')
+    }
 
     const {loginData} = useSelector(state => state.auth)
     
@@ -16,8 +25,6 @@ export default function Login() {
         email: Yup.string().required(),
         password: Yup.string().required(),
     })
-
-    const dispatch = useDispatch()
 
     useEffect(()=>{
           if(loginData) {
@@ -56,6 +63,9 @@ export default function Login() {
             </Container>
            <Button positive type="submit" disabled={isSubmitting}>
              Log in
+           </Button>
+           <Button color="blue" onClick={handleSignUp} disabled={isSubmitting}>
+             Sign up
            </Button>
          </Form>
        )}
