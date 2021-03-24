@@ -5,7 +5,7 @@ import { addItem,updateItem } from '../../../actions/toDo';
 import * as Yup from 'yup' 
 import { Button } from 'semantic-ui-react';
 import * as dateFns from "date-fns";
-import { setSelectedDate } from '../../../actions';
+import MyTextArea from '../../common/MyTextArea';
 
 export default function AddMeetingForm({toggleModal}) {
     const {loginData: {userId, access_token}} = useSelector(state => state.auth)
@@ -65,14 +65,14 @@ export default function AddMeetingForm({toggleModal}) {
              name="date"
              placeholder={initialValues.date}
            />
-           <Field 
-             style={{marginTop:"10px"}}
+           <MyTextArea 
+             style={{marginTop:'10px'}}
              as="textarea"
              name="body"
              rows="1"
+             placeholder="Conference title"
              onChange={(e) => setInitialValues({...initialValues,body: e.target.value})}
              value={initialValues.body}
-             placeholder="Conference title"
              onKeyPress={e=>{
                 if (e.key === 'Enter' && e.shiftKey) {
                     return
@@ -81,14 +81,13 @@ export default function AddMeetingForm({toggleModal}) {
                     isValid && handleSubmit()
                 }}}   
            />
-           <Field
-             style={{marginTop:"10px"}}
+           <MyTextArea 
              as="textarea"
-             rows="1"
-             name="link"
+             name="body"
+             rows="2"
              placeholder="Link"
-             value={initialValues.link}
              onChange={(e) => setInitialValues({...initialValues,link: e.target.value})}
+             value={initialValues.link}
            />
            <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
              Submit

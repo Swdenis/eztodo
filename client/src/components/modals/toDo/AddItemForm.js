@@ -5,6 +5,7 @@ import { addItem, updateItem } from '../../../actions/toDo';
 import * as Yup from 'yup' 
 import { Button, Header } from 'semantic-ui-react';
 import * as dateFns from "date-fns";
+import MyTextArea from '../../common/MyTextArea';
 
 export default function AddItemForm({toggleModal}) {
 
@@ -66,11 +67,12 @@ export default function AddItemForm({toggleModal}) {
              name="date"
              placeholder={initialValues.date}
            />
-           <Field 
-             style={{marginTop:"10px"}}
+           <MyTextArea 
+             style={{marginTop:'10px'}}
              as="textarea"
              name="body"
-             placeholder='Enter the text (Enter to submit, SHIFT + Enter to start a new line)'
+             rows="1"
+             placeholder="Enter the text (Enter to submit, SHIFT + Enter to start a new line)"
              onChange={(e) => setInitialValues({...initialValues,body: e.target.value})}
              value={initialValues.body}
              onKeyPress={e=>{
@@ -79,7 +81,7 @@ export default function AddItemForm({toggleModal}) {
                 } else if(e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault()
                     isValid && handleSubmit()
-                }}}
+                }}}   
            />
            {errors.body && touched.date && errors.date}
            <Button style={{marginTop:"10px"}} positive type="submit" disabled={isSubmitting}>
