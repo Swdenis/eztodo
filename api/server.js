@@ -9,7 +9,6 @@ const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 let itemsdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
 const bodyParser = require('body-parser')
 
-
 server.use(middlewares);
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
@@ -76,14 +75,14 @@ server.post('/auth/login', (req, res) => {
       const success = false
       const status = 401
       const message = 'Incorrect email or password'
-      res.status(status).json({success,status, message})
-      return
+      return res.status(status).json({success,status, message})
+      
     }
     const success = true
     const access_token = createToken({email, password})
     const user = userdb.users.find(user=> user.email === email)
     const userId = user.id
-    res.status(200).json({userId, success, access_token})
+    return res.status(200).json({userId, success, access_token})
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
@@ -91,8 +90,8 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       const status = 401
       const message = 'Error in authorization format'
-      res.status(status).json({status, message})
-      return
+      return res.status(status).json({status, message})
+      
     }
     try {
       let verifyTokenResult;
@@ -101,14 +100,13 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
        if (verifyTokenResult instanceof Error) {
          const status = 401
          const message = 'Access token not provided'
-         res.status(status).json({status, message})
-         return
+         return res.status(status).json({status, message})
        }
        next()
     } catch (err) {
       const status = 401
       const message = 'Error access_token is revoked'
-      res.status(status).json({status, message})
+      return res.status(status).json({status, message})
     }
 })
 
@@ -116,8 +114,8 @@ server.get('/items/userId', (req, res) => {
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
         const status = 401
         const message = 'Error in authorization format'
-        res.status(status).json({status, message})
-        return
+        return res.status(status).json({status, message})
+        
       }
       try {
         let verifyTokenResult;
@@ -126,8 +124,8 @@ server.get('/items/userId', (req, res) => {
          if (verifyTokenResult instanceof Error) {
            const status = 401
            const message = 'Access token not provided'
-           res.status(status).json({status, message})
-           return
+           return res.status(status).json({status, message})
+           
          }
         itemsdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
         const userId = req.headers.userid
@@ -136,31 +134,33 @@ server.get('/items/userId', (req, res) => {
       } catch (err) {
         const status = 401
         const message = 'Error access_token is revoked'
-        res.status(status).json({status, message})
+        return res.status(status).json({status, message})
       }
 })
 
 server.post('/signup', (req, res) => {
   const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
   const {email,password} = req.body
-  console.log(userdb.users)
   const emailUsed = userdb.users.findIndex(user=> user.email === email)
   if (emailUsed !== -1) {
     const success = false
     const status = 401
     const message = 'This email has already been used'
-    res.status(status).json({success,status, message})
-    return
+    return res.status(status).json({success,status, message})
   }
-  readFile(users => {
-    const id = uuidv4()
-    users[id] = req.body;
-    console.log(users)
-    writeFile(JSON.stringify(data, null, 2), () => {
-      res.status(200).send('sign up successfull');
-    });
-  }, true);
-  })
+  const id = uuidv4()
+  const users = userdb.users.push({id:id,email:email,password:password})
+  console.log(users)
+  const fileData = JSON.stringify(users, null, 2)
+  console.log(fileData)
+  fs.writeFile('./users.json', fileData, 'UTF-8', err => {
+    if (err) {
+      throw err;
+    }
+    () => {
+      return res.status(200).json('sign-up successfull')
+  };
+  })})
 
 server.listen(port);
 server.use(router);

@@ -178,12 +178,12 @@ main {
 
 .calendar .body .cell .countDeadlines {
   position: absolute;
+  color: crimson;
   top: 3.7em;
   left: 4em;
-  color: red;
   font-size: 82.5%;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .calendar .body .cell:hover {
@@ -259,7 +259,7 @@ main {
 }
 
 .deadline {
-  border-left: 5px solid red;  
+  border-left: 5px solid crimson;  
 }
 
 /*home page styles*/

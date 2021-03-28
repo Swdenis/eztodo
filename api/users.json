@@ -1,14 +1,13 @@
-{
-  "users": [
-    {
-      "id": "1",
-      "email": "test@test.com",
-      "password": "fipadnfio3289bJOASODB"
-    },
-    {
-      "id": "2",
-      "email": "test123@test.com",
-      "password": "fipadnfio3289bJOASODB"
-    }
-  ]
+{"users":[
+  {
+    "id": "1",
+    "email": "test@test.com",
+    "password": "fipadnfio3289bJOASODB"
+  },
+  {
+    "id": "2",
+    "email": "test123@test.com",
+    "password": "fipadnfio3289bJOASODB"
+  }
+]
 }

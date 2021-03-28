@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
+import { toggleRegisterModal } from '../../../actions/modal'
 import { setItemToEdit } from '../../../actions/toDo'
 import history from '../../../history'
 import RegisterForm from './RegisterForm'
@@ -11,20 +12,20 @@ export default function RegisterModal() {
 
     const {registerModalOpen} = useSelector(state => state.modal)
 
-    const toggleRegisterModal= () => {
+    const handleToogleRegisterModal = () => {
+        history.push('/')
         dispatch(toggleRegisterModal())
-        history.goBack()
     }
 
     return (
         <Modal
             open={registerModalOpen}
             size="tiny"
-            onClose={toggleRegisterModal}
+            onClose={handleToogleRegisterModal}
         >
             <Modal.Header>Sign up</Modal.Header>
             <Modal.Content>
-                <RegisterForm toggleModal={toggleRegisterModal}/>
+                <RegisterForm toggleModal={handleToogleRegisterModal}/>
             </Modal.Content>
         </Modal>
     )

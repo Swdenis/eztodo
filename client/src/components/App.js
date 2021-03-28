@@ -25,8 +25,8 @@ export default function App() {
             <ToastContainer position='bottom-right' hideProgressBar />
             <Container>
                 <Route path='/' exact component={Login}/>
-                <PrivateRoute path='/' component={NavBar}/>
                 <Route path='/register' component={RegisterModal}/>
+                <PrivateRoute path='/' component={NavBar}/>
                 <PrivateRoute path='/todo' component={ToDoNavBar}/>
                 <PrivateRoute path={'/todo/(.+)/add'} component={AddItemModal}/>
                 <PrivateRoute path='/todo/month' component={Month}/>
