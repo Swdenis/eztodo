@@ -20,13 +20,13 @@ export default function Item({loginData,item}) {
         basic
         style={{boxShadow:"none"}}
         hoverable
+        onMouseLeave={handleMouseLeave}
         trigger={
 
             <Segment
                 key={item.id}
                 id={item.id} 
                 onMouseEnter={e => handelShowEditItems(e)}
-                onMouseLeave={handleMouseLeave}
                 className={item.isDone ? 'isDone': ''}
                 style={{fontSize:"115%"}}
             >
@@ -37,7 +37,7 @@ export default function Item({loginData,item}) {
                 {item.body}
                 </Segment.Inline>
             </Segment.Inline>
-        </Segment>
+            </Segment>
         }>
             <Popup.Content>
                 <DoneDeleteEditButtons size="large" loginData={loginData} 
