@@ -1,0 +1,25 @@
+{
+  "name": "eztodo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server":"cd ./server && npm install && npm start",
+    "client":"cd ./client && npm install && npm start",
+    "start": "npm install && concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swdenis/eztodo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Swdenis/eztodo/issues"
+  },
+  "homepage": "https://github.com/Swdenis/eztodo#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
+}
