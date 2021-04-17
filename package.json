@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server":"cd ./api && npm install && npm start",
-    "client":"cd ./client && npm install && npm start",
+    "server": "cd ./api && npm install && npm run start-auth",
+    "client": "cd ./client && npm install && npm start",
     "start": "npm install && concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
